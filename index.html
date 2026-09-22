@@ -1,0 +1,2174 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Meta Reklam Kâr Panosu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  color-scheme: light;
+  --bg:#eef1f5;
+  --surface:#fbfcfd;
+  --surface-2:#f2f5f9;
+  --ink:#0f1418;
+  --ink-2:#4d5965;
+  --ink-3:#7f8b97;
+  --line:#dde4ea;
+  --line-strong:#c6d0da;
+  --accent:#2a78d6;
+  --accent-ink:#1c5cab;
+  --accent-soft:#e4edfb;
+  --good:#0ca30c;
+  --warning:#fab219;
+  --serious:#ec835a;
+  --critical:#d03b3b;
+  --good-ink:#05730a;
+  --warning-ink:#845c00;
+  --serious-ink:#a34d1c;
+  --critical-ink:#a82c2c;
+  --neutral:#8593a0;
+  --neutral-ink:#4d5965;
+  --shadow:0 1px 2px rgba(15,20,24,.05), 0 10px 28px -20px rgba(15,20,24,.35);
+  --font-display:'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-ui:'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --r:12px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --bg:#0a0d10;
+    --surface:#151a1f;
+    --surface-2:#1c2228;
+    --ink:#f2f5f8;
+    --ink-2:#adb8c3;
+    --ink-3:#7b8792;
+    --line:#252d35;
+    --line-strong:#3a444e;
+    --accent:#3987e5;
+    --accent-ink:#86b6ef;
+    --accent-soft:#16263c;
+    --good-ink:#35c235;
+    --warning-ink:#f6c64a;
+    --serious-ink:#f2a37b;
+    --critical-ink:#ef7b7b;
+    --neutral-ink:#adb8c3;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -20px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --bg:#0a0d10;
+  --surface:#151a1f;
+  --surface-2:#1c2228;
+  --ink:#f2f5f8;
+  --ink-2:#adb8c3;
+  --ink-3:#7b8792;
+  --line:#252d35;
+  --line-strong:#3a444e;
+  --accent:#3987e5;
+  --accent-ink:#86b6ef;
+  --accent-soft:#16263c;
+  --good-ink:#35c235;
+  --warning-ink:#f6c64a;
+  --serious-ink:#f2a37b;
+  --critical-ink:#ef7b7b;
+  --neutral-ink:#adb8c3;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -20px rgba(0,0,0,.8);
+}
+
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+html,body{margin:0}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font-ui);
+  font-size:14px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:var(--font-display); text-wrap:balance; margin:0}
+button{font:inherit; color:inherit}
+
+.wrap{max-width:1180px; margin:0 auto; padding-inline:20px; padding-block:0 72px}
+
+/* ---------- header ---------- */
+.top{
+  display:flex; align-items:flex-end; justify-content:space-between;
+  gap:16px; flex-wrap:wrap;
+  padding-block:28px 22px;
+}
+.brand h1{font-size:23px; font-weight:700; letter-spacing:-.02em}
+.brand p{margin:4px 0 0; color:var(--ink-3); font-size:13px; max-width:52ch}
+.theme-btn{
+  display:inline-flex; align-items:center; gap:7px;
+  background:var(--surface); border:1px solid var(--line); color:var(--ink-2);
+  border-radius:999px; padding:7px 13px; cursor:pointer; font-size:12.5px;
+}
+.theme-btn:hover{border-color:var(--line-strong); color:var(--ink)}
+
+/* ---------- generic surfaces ---------- */
+.card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--r);
+}
+.eyebrow{
+  font-size:11px; font-weight:600; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--ink-3);
+}
+.section{margin-top:26px}
+.section-head{display:flex; align-items:baseline; justify-content:space-between; gap:14px; flex-wrap:wrap; margin-bottom:12px}
+.section-head h2{font-size:16px; font-weight:600; letter-spacing:-.01em}
+.section-head .hint{color:var(--ink-3); font-size:12.5px}
+
+/* ---------- source bar ---------- */
+.source{
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+  padding:13px 16px; box-shadow:var(--shadow);
+}
+.source .meta{display:flex; flex-direction:column; gap:2px; min-width:0; flex:1 1 220px}
+.source .fname{font-weight:600; font-size:14px; overflow-wrap:anywhere}
+.source .fmeta{color:var(--ink-3); font-size:12.5px}
+.tag{
+  display:inline-block; font-size:10.5px; font-weight:600; letter-spacing:.07em;
+  text-transform:uppercase; padding:2px 7px; border-radius:5px;
+  background:var(--accent-soft); color:var(--accent-ink); vertical-align:2px; margin-left:8px;
+}
+.btn{
+  border:1px solid var(--line-strong); background:var(--surface-2); color:var(--ink);
+  border-radius:9px; padding:8px 14px; cursor:pointer; font-size:13px; font-weight:500;
+  white-space:nowrap;
+}
+.btn:hover{border-color:var(--ink-3)}
+.btn-primary{background:var(--accent); border-color:var(--accent); color:#fff}
+.btn-primary:hover{background:var(--accent-ink); border-color:var(--accent-ink)}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:6px}
+
+/* ---------- settings ---------- */
+.settings{margin-top:12px; padding:14px 16px}
+.settings-grid{
+  display:grid; gap:14px;
+  grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
+}
+.field{display:flex; flex-direction:column; gap:5px; min-width:0}
+.field label{font-size:12px; color:var(--ink-2); font-weight:500}
+.field input, .field select{
+  font:inherit; font-size:13.5px; color:var(--ink);
+  background:var(--surface-2); border:1px solid var(--line);
+  border-radius:8px; padding:7px 9px; width:100%;
+}
+.field .sub{font-size:11.5px; color:var(--ink-3)}
+.settings-note{
+  margin:12px 0 0; padding-top:12px; border-top:1px solid var(--line);
+  color:var(--ink-3); font-size:12.5px;
+}
+
+/* ---------- mapper ---------- */
+.mapper{margin-top:12px; padding:0}
+.mapper > summary{
+  list-style:none; cursor:pointer; padding:12px 16px;
+  display:flex; align-items:center; gap:10px; font-size:13px; font-weight:500;
+}
+.mapper > summary::-webkit-details-marker{display:none}
+.mapper > summary::before{content:"▸"; color:var(--ink-3); font-size:11px}
+.mapper[open] > summary::before{content:"▾"}
+.mapper .state{margin-left:auto; font-size:12px; color:var(--ink-3); font-weight:400}
+.mapper .body{padding:0 16px 16px; border-top:1px solid var(--line); padding-top:14px}
+
+/* ---------- alert ---------- */
+.alert{
+  display:flex; gap:11px; align-items:flex-start;
+  margin-top:12px; padding:12px 15px; border-radius:var(--r);
+  border:1px solid var(--line); background:var(--surface);
+  border-left:3px solid var(--warning); font-size:13px; color:var(--ink-2);
+}
+.alert strong{color:var(--ink); font-weight:600}
+
+/* ---------- summary ---------- */
+.summary{display:grid; grid-template-columns:minmax(250px,320px) 1fr; gap:14px}
+.hero{
+  padding:20px; display:flex; flex-direction:column; gap:3px;
+  box-shadow:var(--shadow);
+}
+.hero .eyebrow{margin-bottom:3px}
+.hero-value{
+  font-family:var(--font-display); font-size:46px; font-weight:700;
+  letter-spacing:-.035em; line-height:1.05; overflow-wrap:anywhere;
+}
+.hero-value.pos{color:var(--good-ink)}
+.hero-value.neg{color:var(--critical-ink)}
+.hero-note{color:var(--ink-3); font-size:12.5px; margin-top:7px}
+.hero-split{
+  margin-top:auto; padding-top:16px; display:flex; gap:18px; flex-wrap:wrap;
+  border-top:1px solid var(--line); font-size:12.5px; color:var(--ink-2);
+}
+.hero-split b{display:block; font-weight:600; color:var(--ink); font-size:14px}
+
+.tiles{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+.tile{padding:15px 16px; display:flex; flex-direction:column; gap:3px; min-width:0}
+.tile .label{font-size:12px; color:var(--ink-2)}
+.tile .value{
+  font-family:var(--font-display); font-size:25px; font-weight:600;
+  letter-spacing:-.02em; line-height:1.2; overflow-wrap:anywhere;
+}
+.tile .sub{font-size:11.5px; color:var(--ink-3)}
+
+/* ---------- status ---------- */
+[data-status="stop"]{--c:var(--critical); --ci:var(--critical-ink)}
+[data-status="fix"]{--c:var(--serious); --ci:var(--serious-ink)}
+[data-status="watch"]{--c:var(--warning); --ci:var(--warning-ink)}
+[data-status="ok"]{--c:var(--good); --ci:var(--good-ink)}
+[data-status="scale"]{--c:var(--good); --ci:var(--good-ink)}
+[data-status="low"]{--c:var(--neutral); --ci:var(--neutral-ink)}
+
+.chip{
+  display:inline-flex; align-items:center; gap:6px; white-space:nowrap;
+  font-size:11.5px; font-weight:600; padding:3px 9px 3px 7px; border-radius:6px;
+  background:var(--surface-2);
+  color:var(--ci);
+}
+.chip .dot{width:7px; height:7px; border-radius:50%; background:var(--c); flex:none}
+
+/* ---------- action lists ---------- */
+.actions{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+.acol{padding:16px; display:flex; flex-direction:column; gap:10px}
+.acol h3{font-size:13.5px; font-weight:600; display:flex; align-items:center; gap:8px}
+.acol h3 .count{
+  font-size:11.5px; font-weight:600; color:var(--ink-3);
+  background:var(--surface-2); border-radius:999px; padding:1px 8px;
+}
+.item{
+  display:grid; grid-template-columns:auto 1fr; gap:4px 11px;
+  padding:11px 0 0; border-top:1px solid var(--line);
+}
+.acol .item:first-of-type{border-top:0; padding-top:2px}
+.item .bar{width:3px; border-radius:2px; background:var(--c); grid-row:span 2}
+.item .name{font-weight:600; font-size:13.5px; overflow-wrap:anywhere}
+.item .why{color:var(--ink-2); font-size:12.5px}
+.empty-note{color:var(--ink-3); font-size:12.5px; padding:6px 0}
+
+/* ---------- table ---------- */
+.tablewrap{overflow-x:auto; border-radius:var(--r); border:1px solid var(--line); background:var(--surface)}
+table{border-collapse:collapse; width:100%; min-width:840px; font-size:13px}
+thead th{
+  text-align:right; font-weight:600; font-size:11.5px; letter-spacing:.04em;
+  text-transform:uppercase; color:var(--ink-3);
+  padding:11px 14px; border-bottom:1px solid var(--line-strong);
+  background:var(--surface-2); white-space:nowrap;
+}
+thead th:first-child, thead th:nth-child(2){text-align:left}
+thead th button{
+  background:none; border:0; padding:0; cursor:pointer; font:inherit;
+  letter-spacing:inherit; text-transform:inherit; color:inherit;
+}
+thead th button:hover{color:var(--ink)}
+thead th[aria-sort] button{color:var(--ink)}
+thead th button .ar{opacity:.55; margin-left:3px}
+tbody td{
+  padding:10px 14px; border-bottom:1px solid var(--line);
+  text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap;
+  color:var(--ink-2);
+}
+tbody tr:last-child td{border-bottom:0}
+tbody td:first-child{
+  text-align:left; white-space:normal; min-width:220px;
+  color:var(--ink); font-weight:500;
+}
+tbody td:nth-child(2){text-align:left}
+tbody tr:hover td{background:var(--surface-2)}
+td.strong{color:var(--ink); font-weight:600}
+td.pos{color:var(--good-ink); font-weight:600}
+td.neg{color:var(--critical-ink); font-weight:600}
+.roascell{display:flex; align-items:center; justify-content:flex-end; gap:9px}
+.meter{
+  position:relative; width:64px; height:7px; border-radius:4px; flex:none;
+  background:var(--surface-2);
+  background:color-mix(in srgb, var(--c) 16%, transparent);
+}
+.meter i{
+  position:absolute; inset:0 auto 0 0; display:block;
+  border-radius:4px; background:var(--c);
+}
+.meter::after{
+  content:""; position:absolute; left:50%; top:-2px; bottom:-2px; width:1px;
+  background:var(--line-strong);
+}
+.seg{display:inline-flex; background:var(--surface-2); border:1px solid var(--line); border-radius:9px; padding:3px; gap:2px}
+.seg button{
+  border:0; background:none; border-radius:6px; padding:5px 11px; cursor:pointer;
+  font-size:12.5px; color:var(--ink-2);
+}
+.seg button[aria-pressed="true"]{background:var(--surface); color:var(--ink); font-weight:600; box-shadow:var(--shadow)}
+
+/* ---------- dropzone ---------- */
+.dropzone{
+  position:fixed; inset:0; z-index:50;
+  background:color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter:blur(2px);
+  display:flex; align-items:center; justify-content:center; padding:24px;
+}
+.dropzone .inner{
+  border:2px dashed var(--accent); border-radius:16px; background:var(--surface);
+  padding:36px 44px; text-align:center; max-width:420px;
+}
+.dropzone h3{font-size:18px; margin-bottom:6px}
+.dropzone p{margin:0; color:var(--ink-2); font-size:13px}
+
+footer{margin-top:34px; color:var(--ink-3); font-size:12px; line-height:1.7}
+footer b{color:var(--ink-2); font-weight:600}
+
+/* ---------- üst düğmeler ---------- */
+.top-actions{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+.theme-btn.accent{background:var(--accent-soft); border-color:transparent; color:var(--accent-ink); font-weight:600}
+.theme-btn.accent:hover{border-color:var(--accent)}
+select.langsel{
+  appearance:none; -webkit-appearance:none; cursor:pointer;
+  padding-right:28px;
+  background-image:linear-gradient(45deg, transparent 50%, var(--ink-3) 50%), linear-gradient(135deg, var(--ink-3) 50%, transparent 50%);
+  background-position: calc(100% - 14px) 55%, calc(100% - 9px) 55%;
+  background-size:5px 5px, 5px 5px;
+  background-repeat:no-repeat;
+}
+select.langsel:hover{border-color:var(--line-strong)}
+footer p{margin:0 0 8px}
+footer p:last-child{margin-bottom:0}
+
+/* ---------- açılır panel ---------- */
+dialog.sheet{
+  border:0; padding:0; margin:auto; color:var(--ink);
+  width:min(780px, calc(100% - 28px)); max-width:none;
+  max-height:min(88vh, 920px);
+  border-radius:16px; background:var(--surface);
+  box-shadow:0 30px 80px -28px rgba(0,0,0,.55);
+}
+dialog.sheet[open]{display:flex; flex-direction:column}
+dialog.sheet::backdrop{background:rgba(8,11,14,.6)}
+.sheet-head{
+  flex:none; display:flex; align-items:center; gap:12px;
+  padding:16px 20px; border-bottom:1px solid var(--line);
+}
+.sheet-head h2{font-size:17px; font-weight:600; letter-spacing:-.01em; flex:1; min-width:0}
+.sheet-head .sub{
+  display:block; margin-top:2px; font-family:var(--font-ui); font-size:12.5px;
+  font-weight:400; letter-spacing:0; color:var(--ink-3);
+}
+.xbtn{
+  flex:none; width:32px; height:32px; border-radius:8px; cursor:pointer;
+  border:1px solid var(--line); background:var(--surface-2); color:var(--ink-2);
+  font-size:17px; line-height:1;
+}
+.xbtn:hover{border-color:var(--line-strong); color:var(--ink)}
+.sheet-body{padding:20px; overflow-y:auto; overscroll-behavior:contain}
+
+/* ---------- basit anlatım ---------- */
+.verdict{
+  border-radius:var(--r); padding:17px 19px; margin-bottom:22px;
+  background:var(--surface-2); border-left:3px solid var(--c, var(--accent));
+}
+.verdict h3{font-family:var(--font-display); font-size:19px; font-weight:700; letter-spacing:-.022em; margin-bottom:6px}
+.verdict p{margin:0; color:var(--ink-2); font-size:13.5px}
+.simple h4{font-family:var(--font-display); font-size:14px; font-weight:600; letter-spacing:-.01em; margin:26px 0 10px}
+.simple p{margin:0 0 10px; color:var(--ink-2); font-size:13.5px; max-width:64ch}
+.simple strong{color:var(--ink); font-weight:600}
+.ledger{border:1px solid var(--line); border-radius:var(--r); overflow:hidden}
+.ledger .row{
+  display:flex; align-items:baseline; justify-content:space-between; gap:12px;
+  padding:11px 15px; border-bottom:1px solid var(--line); font-size:13.5px;
+}
+.ledger .row:last-child{border-bottom:0}
+.ledger .row .t{color:var(--ink-2)}
+.ledger .row .t small{display:block; color:var(--ink-3); font-size:11.5px; margin-top:1px}
+.ledger .row .v{font-variant-numeric:tabular-nums; font-weight:600; white-space:nowrap; color:var(--ink)}
+.ledger .row.total{background:var(--surface-2)}
+.ledger .row.total .t{color:var(--ink); font-weight:600}
+.ledger .row.total .v{font-family:var(--font-display); font-size:17px}
+.sbar{display:flex; gap:2px; height:34px; margin:2px 0 11px}
+.sbar span{display:block; min-width:3px}
+.sbar span:first-child{border-radius:6px 0 0 6px}
+.sbar span:last-child{border-radius:0 6px 6px 0}
+.sbar span:only-child{border-radius:6px}
+.slegend{display:flex; flex-wrap:wrap; gap:5px 18px; font-size:12.5px; color:var(--ink-2)}
+.slegend i{display:inline-block; width:9px; height:9px; border-radius:2px; margin-right:7px}
+.steps{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:13px}
+.steps li{display:grid; grid-template-columns:auto 1fr; gap:12px; align-items:start}
+.steps .n{
+  flex:none; width:24px; height:24px; border-radius:50%;
+  background:var(--c, var(--accent)); color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-display); font-size:12px; font-weight:700;
+}
+.steps .txt{font-size:13.5px; color:var(--ink-2)}
+.steps .txt b{display:block; color:var(--ink); font-weight:600; margin-bottom:2px}
+.saving{
+  margin-top:14px; padding:13px 16px; border-radius:var(--r);
+  background:var(--accent-soft); color:var(--accent-ink); font-size:13.5px;
+}
+.saving b{font-weight:700}
+.caveat{margin-top:26px; padding:14px 16px; border-radius:var(--r); background:var(--surface-2); font-size:12.5px; color:var(--ink-2)}
+.caveat b{color:var(--ink)}
+.caveat ul{margin:8px 0 0; padding-left:18px}
+.caveat li{margin:3px 0}
+
+/* ---------- veri güvenliği ---------- */
+.trustbox{
+  border-radius:var(--r); padding:16px 18px; margin-bottom:22px;
+  background:var(--accent-soft); color:var(--accent-ink);
+}
+.trustbox h3{font-family:var(--font-display); font-size:17px; font-weight:700; letter-spacing:-.02em; margin-bottom:5px}
+.trustbox p{margin:0; font-size:13.5px}
+.tlist{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px}
+.tlist li{
+  display:grid; grid-template-columns:auto 1fr; gap:11px; align-items:start;
+  font-size:13.5px; color:var(--ink-2); max-width:66ch;
+}
+.tlist li b{color:var(--ink); font-weight:600}
+.tlist .tick{color:var(--good); font-weight:700; line-height:1.4}
+.tlist .n{
+  flex:none; width:22px; height:22px; border-radius:50%;
+  background:var(--accent); color:#fff; font-family:var(--font-display);
+  font-size:11.5px; font-weight:700;
+  display:flex; align-items:center; justify-content:center;
+}
+.codelink{
+  display:inline-flex; align-items:center; gap:8px; margin-top:12px;
+  padding:9px 14px; border-radius:9px; text-decoration:none; font-size:13px; font-weight:500;
+  background:var(--surface-2); border:1px solid var(--line-strong); color:var(--ink);
+}
+.codelink:hover{border-color:var(--ink-3)}
+.footlink{color:var(--accent-ink); text-decoration:underline; cursor:pointer; background:none; border:0; padding:0; font:inherit}
+
+/* ---------- terimler ---------- */
+.gsearch{
+  width:100%; font:inherit; font-size:14px; color:var(--ink);
+  background:var(--surface-2); border:1px solid var(--line);
+  border-radius:9px; padding:9px 12px;
+}
+.ggroup{margin-top:24px}
+.ggroup .eyebrow{display:block; margin-bottom:4px}
+.gitem{padding:12px 0; border-top:1px solid var(--line)}
+.gitem .term{font-weight:600; font-size:14px; color:var(--ink)}
+.gitem .en{margin-left:7px; font-size:12.5px; font-weight:400; color:var(--ink-3)}
+.gitem .def{margin-top:3px; font-size:13.5px; color:var(--ink-2); max-width:66ch}
+.gitem .tip{margin-top:7px; padding-left:10px; border-left:2px solid var(--accent); font-size:12.5px; color:var(--ink-2); max-width:64ch}
+.gempty{padding:22px 0; color:var(--ink-3); font-size:13px}
+
+@media (max-width:860px){
+  .summary{grid-template-columns:1fr}
+  .tiles{grid-template-columns:repeat(2,1fr)}
+  .actions{grid-template-columns:1fr}
+  .hero-value{font-size:38px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none !important; transition:none !important}}
+</style>
+</head>
+<body>
+
+<div class="dropzone" id="drop" hidden>
+  <div class="inner">
+    <h3 id="dropTitle">Raporu buraya bırak</h3>
+    <p id="dropDesc">Meta Reklam Yöneticisi'nden indirdiğin CSV veya Excel dosyası. Dosya bilgisayarından çıkmaz.</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="top">
+    <div class="brand">
+      <h1 id="brandTitle">Meta Reklam Kâr Panosu</h1>
+      <p id="brandTagline">Reklam raporunu yükle; hangi kampanya kâr getiriyor, hangisi para yakıyor tek bakışta gör.</p>
+    </div>
+    <div class="top-actions">
+      <button class="theme-btn accent" id="simpleBtn" type="button">
+        <span aria-hidden="true">✦</span><span id="simpleBtnText">Basitleştirilmiş analiz</span>
+      </button>
+      <button class="theme-btn" id="glossBtn" type="button">
+        <span aria-hidden="true">≡</span><span id="glossBtnText">Terimler ve anlamları</span>
+      </button>
+      <button class="theme-btn" id="trustBtn" type="button">
+        <span aria-hidden="true">⛊</span><span id="trustBtnText">Veri güvenliği</span>
+      </button>
+      <button class="theme-btn" id="themeBtn" type="button" aria-label="Görünümü değiştir">
+        <span id="themeIcon">◐</span><span id="themeText">Koyu tema</span>
+      </button>
+      <select class="theme-btn langsel" id="langSel" aria-label="Dil / Language / Idioma / Sprache / Язык">
+        <option value="tr">🇹🇷 Türkçe</option>
+        <option value="en">🇬🇧 English</option>
+        <option value="es">🇪🇸 Español</option>
+        <option value="de">🇩🇪 Deutsch</option>
+        <option value="ru">🇷🇺 Русский</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="source card">
+    <div class="meta">
+      <div class="fname" id="srcName">Örnek veri yüklü<span class="tag" id="srcTag">Örnek</span></div>
+      <div class="fmeta" id="srcMeta">—</div>
+    </div>
+    <button class="btn btn-primary" id="pickBtn" type="button">Rapor yükle</button>
+    <button class="btn" id="demoBtn" type="button">Örnek veriye dön</button>
+    <input type="file" id="fileInput" accept=".csv,.txt,.tsv,.xlsx,.xls" hidden>
+  </div>
+
+  <div class="alert" id="alert" hidden><span aria-hidden="true">⚠</span><div id="alertText"></div></div>
+
+  <details class="mapper card" id="mapper">
+    <summary><span id="mapperLabel">Sütun eşleştirme</span><span class="state" id="mapState"></span></summary>
+    <div class="body">
+      <div class="settings-grid" id="mapGrid"></div>
+    </div>
+  </details>
+
+  <div class="settings card">
+    <div class="settings-grid">
+      <div class="field">
+        <label for="margin" id="marginLabel">Ürün kâr marjın (%)</label>
+        <input type="number" id="margin" min="1" max="95" step="1" value="40">
+        <span class="sub" id="marginSub">Ürünü sattığında cebinde kalan oran</span>
+      </div>
+      <div class="field">
+        <label for="minSpend" id="minSpendLabel">Minimum harcama eşiği</label>
+        <input type="number" id="minSpend" min="0" step="50" value="500">
+        <span class="sub" id="minSpendSub">Bunun altı "karar için az veri"</span>
+      </div>
+      <div class="field">
+        <label for="currency" id="currencyLabel">Para birimi</label>
+        <select id="currency">
+          <option value="TRY">₺ Türk Lirası</option>
+          <option value="USD">$ Dolar</option>
+          <option value="EUR">€ Euro</option>
+          <option value="GBP">£ Sterlin</option>
+          <option value="RUB">₽ Rus Rublesi</option>
+        </select>
+        <span class="sub" id="currencySub">Rapordan otomatik okunur</span>
+      </div>
+      <div class="field">
+        <label for="numfmt" id="numfmtLabel">Sayı biçimi</label>
+        <select id="numfmt">
+          <option value="auto">Otomatik</option>
+          <option value="tr">1.234,56</option>
+          <option value="en">1,234.56</option>
+        </select>
+        <span class="sub" id="numfmtSub">Rakamlar yanlışsa buradan düzelt</span>
+      </div>
+    </div>
+    <p class="settings-note" id="beNote"></p>
+  </div>
+
+  <section class="section">
+    <div class="section-head">
+      <h2 id="summaryTitle">Özet</h2>
+      <span class="hint" id="rangeHint"></span>
+    </div>
+    <div class="summary">
+      <div class="hero card">
+        <span class="eyebrow" id="netLabel">Tahmini net kâr</span>
+        <span class="hero-value" id="netValue">—</span>
+        <span class="hero-note" id="netNote"></span>
+        <div class="hero-split">
+          <div><b id="revValue">—</b><span id="revLabel">Gelir</span></div>
+          <div><b id="grossValue">—</b><span id="grossLabel">Brüt kâr</span></div>
+          <div><b id="spendValue">—</b><span id="spendLabel">Reklam gideri</span></div>
+        </div>
+      </div>
+      <div class="tiles" id="tiles"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2 id="actionsTitle">Ne yapmalısın</h2>
+      <span class="hint" id="actionsHint">Başabaş ROAS'a göre sıralandı</span>
+    </div>
+    <div class="actions">
+      <div class="acol card">
+        <h3><span class="chip" data-status="stop"><span class="dot"></span><span id="badTitleText">Elden geçir</span></span><span class="count" id="badCount">0</span></h3>
+        <div id="badList"></div>
+      </div>
+      <div class="acol card">
+        <h3><span class="chip" data-status="scale"><span class="dot"></span><span id="goodTitleText">Ölçekle</span></span><span class="count" id="goodCount">0</span></h3>
+        <div id="goodList"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2 id="tableTitle">Tüm satırlar</h2>
+      <div class="seg" id="groupSeg" role="group" aria-label="Gruplama düzeyi">
+        <button type="button" data-g="campaign" aria-pressed="true">Kampanya</button>
+        <button type="button" data-g="adset" aria-pressed="false">Reklam seti</button>
+        <button type="button" data-g="ad" aria-pressed="false">Reklam</button>
+      </div>
+    </div>
+    <div class="tablewrap">
+      <table id="table">
+        <thead><tr id="thead"></tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    <p><b id="footerHowB">Nasıl okunur.</b> <span id="footerHowText">Başabaş ROAS = 100 ÷ kâr marjın. ROAS bu sayının altındaysa o reklam para kaybettiriyor. Net kâr = (gelir × kâr marjı) − reklam harcaması; kargo, iade ve sabit giderler dahil değildir.</span></p>
+    <p><b id="footerPrivacyB">Gizlilik.</b> <span id="footerPrivacyText">Yüklediğin dosya hiçbir yere gönderilmez; tüm hesaplama bu sayfanın içinde, senin tarayıcında yapılır.</span> <button type="button" class="footlink" id="footerTrustLink">Nasıl doğrularım?</button></p>
+  </footer>
+</div>
+
+<dialog class="sheet" id="simpleDlg" aria-labelledby="simpleTitle">
+  <div class="sheet-head">
+    <h2 id="simpleTitle"><span id="simpleTitleText">Basitleştirilmiş analiz</span><span class="sub" id="simpleTitleSub">Tek bir Meta terimi kullanmadan, rakamların ne anlama geldiği</span></h2>
+    <button class="xbtn" type="button" data-close aria-label="Kapat">×</button>
+  </div>
+  <div class="sheet-body simple" id="simpleBody"></div>
+</dialog>
+
+<dialog class="sheet" id="trustDlg" aria-labelledby="trustTitle">
+  <div class="sheet-head">
+    <h2 id="trustTitle"><span id="trustTitleText">Verileriniz güvende mi?</span><span class="sub" id="trustTitleSub">Kısa cevap aşağıda — ve bunu kendiniz nasıl doğrulayacağınız</span></h2>
+    <button class="xbtn" type="button" data-close aria-label="Kapat">×</button>
+  </div>
+  <div class="sheet-body simple" id="trustBody"></div>
+</dialog>
+
+<dialog class="sheet" id="glossDlg" aria-labelledby="glossTitle">
+  <div class="sheet-head">
+    <h2 id="glossTitle"><span id="glossTitleText">Terimler ve anlamları</span><span class="sub" id="glossTitleSub">Meta Reklam Yöneticisi'nde karşına çıkan her kelime</span></h2>
+    <button class="xbtn" type="button" data-close aria-label="Kapat">×</button>
+  </div>
+  <div class="sheet-body">
+    <input type="search" class="gsearch" id="gsearch" placeholder="Terim ara — örneğin: roas, piksel, sıklık" aria-label="Terim ara">
+    <div id="glossBody"></div>
+  </div>
+</dialog>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+(function(){
+"use strict";
+
+/* ======================= diller =======================
+   Yeni metin eklerken: aşağıya TEK satır ekle, beş dili birden yaz.
+   Böylece bir dili unutmak imkânsız hale geliyor.                     */
+var LANGS = ["tr","en","es","de","ru"];
+var LOCALE = {tr:"tr-TR", en:"en-US", es:"es-ES", de:"de-DE", ru:"ru-RU"};
+var LANG = "tr";
+
+var STR = {
+/* --- üst bar --- */
+dropTitle:{tr:"Raporu buraya bırak",en:"Drop your report here",es:"Suelta aquí tu informe",de:"Bericht hier ablegen",ru:"Перетащите отчёт сюда"},
+dropDesc:{tr:"Meta Reklam Yöneticisi'nden indirdiğin CSV veya Excel dosyası. Dosya bilgisayarından çıkmaz.",en:"The CSV or Excel file you downloaded from Meta Ads Manager. It never leaves your computer.",es:"El archivo CSV o Excel que descargaste del Administrador de anuncios de Meta. No sale de tu ordenador.",de:"Die CSV- oder Excel-Datei aus dem Meta Werbeanzeigenmanager. Sie verlässt deinen Computer nicht.",ru:"Файл CSV или Excel из Meta Ads Manager. Он не покидает ваш компьютер."},
+brandTitle:{tr:"Meta Reklam Kâr Panosu",en:"Meta Ads Profit Dashboard",es:"Panel de beneficio de Meta Ads",de:"Meta Ads Gewinn-Dashboard",ru:"Панель прибыли Meta Ads"},
+brandTagline:{tr:"Reklam raporunu yükle; hangi kampanya kâr getiriyor, hangisi para yakıyor tek bakışta gör.",en:"Upload your ad report and see at a glance which campaigns make money and which ones burn it.",es:"Sube tu informe de anuncios y ve de un vistazo qué campañas ganan dinero y cuáles lo queman.",de:"Lade deinen Werbebericht hoch und sieh auf einen Blick, welche Kampagnen Geld bringen und welche es verbrennen.",ru:"Загрузите отчёт по рекламе и сразу увидите, какие кампании приносят прибыль, а какие сжигают бюджет."},
+btnSimple:{tr:"Basitleştirilmiş analiz",en:"Plain-language analysis",es:"Análisis en lenguaje sencillo",de:"Analyse in einfacher Sprache",ru:"Простой разбор"},
+btnGloss:{tr:"Terimler ve anlamları",en:"Terms explained",es:"Glosario de términos",de:"Begriffe erklärt",ru:"Термины и значения"},
+themeDark:{tr:"Koyu tema",en:"Dark theme",es:"Tema oscuro",de:"Dunkles Design",ru:"Тёмная тема"},
+themeLight:{tr:"Açık tema",en:"Light theme",es:"Tema claro",de:"Helles Design",ru:"Светлая тема"},
+themeAria:{tr:"Görünümü değiştir",en:"Toggle theme",es:"Cambiar tema",de:"Design wechseln",ru:"Сменить тему"},
+closeAria:{tr:"Kapat",en:"Close",es:"Cerrar",de:"Schließen",ru:"Закрыть"},
+
+/* --- veri kaynağı --- */
+btnUpload:{tr:"Rapor yükle",en:"Upload report",es:"Subir informe",de:"Bericht hochladen",ru:"Загрузить отчёт"},
+btnDemo:{tr:"Örnek veriye dön",en:"Back to sample data",es:"Volver al ejemplo",de:"Zurück zu Beispieldaten",ru:"Вернуться к примеру"},
+tagDemo:{tr:"Örnek",en:"Sample",es:"Ejemplo",de:"Beispiel",ru:"Пример"},
+demoName:{tr:"Örnek veri — 14 satırlık temsili rapor",en:"Sample data — a representative 14-row report",es:"Datos de ejemplo — un informe representativo de 14 filas",de:"Beispieldaten — ein repräsentativer Bericht mit 14 Zeilen",ru:"Примерные данные — типовой отчёт из 14 строк"},
+srcMeta:{tr:"{rows} satır · {cols} sütun · {span}",en:"{rows} rows · {cols} columns · {span}",es:"{rows} filas · {cols} columnas · {span}",de:"{rows} Zeilen · {cols} Spalten · {span}",ru:"{rows} строк · {cols} столбцов · {span}"},
+noDate:{tr:"tarih sütunu yok",en:"no date column",es:"sin columna de fecha",de:"keine Datumsspalte",ru:"нет столбца с датой"},
+rangeHint:{tr:"Dönem: {a} → {b}",en:"Period: {a} → {b}",es:"Periodo: {a} → {b}",de:"Zeitraum: {a} → {b}",ru:"Период: {a} → {b}"},
+noName:{tr:"(adsız)",en:"(unnamed)",es:"(sin nombre)",de:"(ohne Namen)",ru:"(без названия)"},
+
+/* --- sütun eşleştirme --- */
+mapperLabel:{tr:"Sütun eşleştirme",en:"Column matching",es:"Asignación de columnas",de:"Spaltenzuordnung",ru:"Сопоставление столбцов"},
+mapperState:{tr:"{a}/{b} sütun eşleşti",en:"{a} of {b} columns matched",es:"{a} de {b} columnas asignadas",de:"{a} von {b} Spalten zugeordnet",ru:"сопоставлено {a} из {b}"},
+fieldNone:{tr:"— yok —",en:"— none —",es:"— ninguna —",de:"— keine —",ru:"— нет —"},
+fCampaign:{tr:"Kampanya adı",en:"Campaign name",es:"Nombre de la campaña",de:"Kampagnenname",ru:"Название кампании"},
+fAdset:{tr:"Reklam seti adı",en:"Ad set name",es:"Nombre del conjunto de anuncios",de:"Name der Anzeigengruppe",ru:"Название группы объявлений"},
+fAd:{tr:"Reklam adı",en:"Ad name",es:"Nombre del anuncio",de:"Anzeigenname",ru:"Название объявления"},
+fSpend:{tr:"Harcama",en:"Amount spent",es:"Importe gastado",de:"Ausgegebener Betrag",ru:"Потраченная сумма"},
+fRevenue:{tr:"Satış geliri",en:"Sales revenue",es:"Ingresos por ventas",de:"Umsatz",ru:"Выручка от продаж"},
+fPurchases:{tr:"Satın alma sayısı",en:"Number of purchases",es:"Número de compras",de:"Anzahl der Käufe",ru:"Количество покупок"},
+fImpressions:{tr:"Gösterim",en:"Impressions",es:"Impresiones",de:"Impressionen",ru:"Показы"},
+fClicks:{tr:"Tıklama",en:"Clicks",es:"Clics",de:"Klicks",ru:"Клики"},
+fRoas:{tr:"ROAS (varsa)",en:"ROAS (if present)",es:"ROAS (si existe)",de:"ROAS (falls vorhanden)",ru:"ROAS (если есть)"},
+fDate:{tr:"Tarih",en:"Date",es:"Fecha",de:"Datum",ru:"Дата"},
+
+/* --- uyarı --- */
+missSpend:{tr:"harcama",en:"amount spent",es:"importe gastado",de:"ausgegebener Betrag",ru:"потраченная сумма"},
+missRevenue:{tr:"satış geliri",en:"sales revenue",es:"ingresos por ventas",de:"Umsatz",ru:"выручка"},
+missJoin:{tr:" ve ",en:" and ",es:" y ",de:" und ",ru:" и "},
+alertMissing:{tr:"<strong>{f} sütunu bulunamadı.</strong> Hesaplamalar eksik çıkacak. Yukarıdaki <em>Sütun eşleştirme</em> bölümünü açıp doğru sütunu elle seç.",en:"<strong>Could not find the {f} column.</strong> Calculations will be incomplete. Open <em>Column matching</em> above and pick the right column by hand.",es:"<strong>No se encontró la columna {f}.</strong> Los cálculos quedarán incompletos. Abre <em>Asignación de columnas</em> arriba y elige la columna correcta a mano.",de:"<strong>Die Spalte {f} wurde nicht gefunden.</strong> Die Berechnungen bleiben unvollständig. Öffne oben <em>Spaltenzuordnung</em> und wähle die richtige Spalte von Hand.",ru:"<strong>Не найден столбец: {f}.</strong> Расчёты будут неполными. Откройте «Сопоставление столбцов» выше и выберите нужный столбец вручную."},
+
+/* --- ayarlar --- */
+marginLabel:{tr:"Ürün kâr marjın (%)",en:"Your product profit margin (%)",es:"Tu margen de beneficio (%)",de:"Deine Produktmarge (%)",ru:"Ваша маржа прибыли (%)"},
+marginSub:{tr:"Ürünü sattığında cebinde kalan oran",en:"The share that stays with you after a sale",es:"La parte que te queda tras una venta",de:"Der Anteil, der dir nach einem Verkauf bleibt",ru:"Доля, которая остаётся вам после продажи"},
+minSpendLabel:{tr:"Minimum harcama eşiği",en:"Minimum spend threshold",es:"Umbral mínimo de gasto",de:"Mindestausgaben-Schwelle",ru:"Минимальный порог расходов"},
+minSpendSub:{tr:"Bunun altı \"karar için az veri\"",en:"Below this: \"not enough data yet\"",es:"Por debajo: «datos insuficientes»",de:"Darunter: „zu wenig Daten“",ru:"Ниже этого — «мало данных»"},
+currencyLabel:{tr:"Para birimi",en:"Currency",es:"Moneda",de:"Währung",ru:"Валюта"},
+currencySub:{tr:"Rapordan otomatik okunur",en:"Detected from the report",es:"Se detecta en el informe",de:"Wird aus dem Bericht erkannt",ru:"Определяется из отчёта"},
+numfmtLabel:{tr:"Sayı biçimi",en:"Number format",es:"Formato de números",de:"Zahlenformat",ru:"Формат чисел"},
+numfmtSub:{tr:"Rakamlar yanlışsa buradan düzelt",en:"Fix it here if the numbers look wrong",es:"Corrígelo aquí si los números salen mal",de:"Hier korrigieren, wenn die Zahlen falsch aussehen",ru:"Исправьте здесь, если числа неверны"},
+fmtAuto:{tr:"Otomatik",en:"Automatic",es:"Automático",de:"Automatisch",ru:"Автоматически"},
+curTRY:{tr:"₺ Türk Lirası",en:"₺ Turkish lira",es:"₺ Lira turca",de:"₺ Türkische Lira",ru:"₺ Турецкая лира"},
+curUSD:{tr:"$ Dolar",en:"$ US dollar",es:"$ Dólar estadounidense",de:"$ US-Dollar",ru:"$ Доллар США"},
+curEUR:{tr:"€ Euro",en:"€ Euro",es:"€ Euro",de:"€ Euro",ru:"€ Евро"},
+curGBP:{tr:"£ Sterlin",en:"£ British pound",es:"£ Libra esterlina",de:"£ Britisches Pfund",ru:"£ Фунт стерлингов"},
+curRUB:{tr:"₽ Rus Rublesi",en:"₽ Russian ruble",es:"₽ Rublo ruso",de:"₽ Russischer Rubel",ru:"₽ Российский рубль"},
+beNote:{tr:"Başabaş ROAS'ın <strong>{be}</strong>. Yani her 1 {s} reklam harcaman en az {be} ciro getirmezse o reklam zarar ediyor.",en:"Your break-even ROAS is <strong>{be}</strong>. So unless every 1 {s} you spend brings back at least {be} in revenue, that ad is losing money.",es:"Tu ROAS de equilibrio es <strong>{be}</strong>. Si cada 1 {s} que gastas no devuelve al menos {be} en ingresos, ese anuncio pierde dinero.",de:"Dein Break-even-ROAS liegt bei <strong>{be}</strong>. Wenn also 1 {s} Werbeausgabe nicht mindestens {be} Umsatz zurückbringt, macht diese Anzeige Verlust.",ru:"Ваш ROAS безубыточности — <strong>{be}</strong>. Если каждый потраченный 1 {s} не приносит хотя бы {be} выручки, реклама работает в минус."},
+
+/* --- özet --- */
+summaryTitle:{tr:"Özet",en:"Summary",es:"Resumen",de:"Übersicht",ru:"Сводка"},
+netLabel:{tr:"Tahmini net kâr",en:"Estimated net profit",es:"Beneficio neto estimado",de:"Geschätzter Nettogewinn",ru:"Расчётная чистая прибыль"},
+netPos:{tr:"Reklam harcaman kendini çıkarıyor ve üstüne bu kadar kalıyor.",en:"Your ad spend pays for itself, and this much is left over.",es:"Tu inversión se paga sola y aún queda esto.",de:"Deine Werbeausgaben rechnen sich, und so viel bleibt übrig.",ru:"Расходы на рекламу окупаются, и столько остаётся сверху."},
+netNeg:{tr:"Reklam harcaman ürün kârını aşıyor — bu dönem zarardasın.",en:"Your ad spend exceeds your product profit — you are in the red this period.",es:"Tu inversión supera el beneficio del producto: este periodo estás en pérdidas.",de:"Deine Werbeausgaben übersteigen den Produktgewinn — in diesem Zeitraum machst du Verlust.",ru:"Расходы на рекламу превышают прибыль с товара — за этот период вы в минусе."},
+revLabel:{tr:"Gelir",en:"Revenue",es:"Ingresos",de:"Umsatz",ru:"Выручка"},
+grossLabel:{tr:"Brüt kâr",en:"Gross profit",es:"Beneficio bruto",de:"Bruttogewinn",ru:"Валовая прибыль"},
+spendLabel:{tr:"Reklam gideri",en:"Ad spend",es:"Gasto en anuncios",de:"Werbeausgaben",ru:"Расходы на рекламу"},
+tSpend:{tr:"Reklam harcaması",en:"Ad spend",es:"Gasto en anuncios",de:"Werbeausgaben",ru:"Расходы на рекламу"},
+tRevenue:{tr:"Satış geliri",en:"Sales revenue",es:"Ingresos por ventas",de:"Umsatz",ru:"Выручка от продаж"},
+tRevenueSub:{tr:"reklamlardan gelen ciro",en:"turnover from ads",es:"facturación generada por anuncios",de:"durch Anzeigen erzielter Umsatz",ru:"оборот, полученный с рекламы"},
+roasAbove:{tr:"Başabaşın %{p} üstünde",en:"{p}% above break-even",es:"{p}% por encima del equilibrio",de:"{p}% über dem Break-even",ru:"на {p}% выше безубыточности"},
+roasBelow:{tr:"Başabaşın %{p} altında",en:"{p}% below break-even",es:"{p}% por debajo del equilibrio",de:"{p}% unter dem Break-even",ru:"на {p}% ниже безубыточности"},
+tPurchases:{tr:"Satın alma",en:"Purchases",es:"Compras",de:"Käufe",ru:"Покупки"},
+tPurchasesSub:{tr:"toplam sipariş",en:"total orders",es:"pedidos totales",de:"Bestellungen insgesamt",ru:"всего заказов"},
+tCpa:{tr:"Sipariş başı maliyet",en:"Cost per order",es:"Coste por pedido",de:"Kosten pro Bestellung",ru:"Стоимость заказа"},
+tCpaSub:{tr:"reklam gideri ÷ sipariş",en:"ad spend ÷ orders",es:"gasto ÷ pedidos",de:"Werbeausgaben ÷ Bestellungen",ru:"расходы ÷ заказы"},
+tBe:{tr:"Başabaş ROAS",en:"Break-even ROAS",es:"ROAS de equilibrio",de:"Break-even-ROAS",ru:"ROAS безубыточности"},
+tBeSub:{tr:"%{m} kâr marjına göre",en:"based on a {m}% margin",es:"según un margen del {m}%",de:"bei {m}% Marge",ru:"при марже {m}%"},
+uCampaign:{tr:"kampanya",en:"campaigns",es:"campañas",de:"Kampagnen",ru:"кампаний"},
+uAdset:{tr:"reklam seti",en:"ad sets",es:"conjuntos",de:"Anzeigengruppen",ru:"групп объявлений"},
+uAd:{tr:"reklam",en:"ads",es:"anuncios",de:"Anzeigen",ru:"объявлений"},
+
+/* --- ne yapmalısın --- */
+actionsTitle:{tr:"Ne yapmalısın",en:"What to do next",es:"Qué hacer ahora",de:"Was du tun solltest",ru:"Что делать дальше"},
+actionsHint:{tr:"Başabaş ROAS'a göre sıralandı",en:"Ranked against your break-even ROAS",es:"Ordenado según tu ROAS de equilibrio",de:"Sortiert nach deinem Break-even-ROAS",ru:"Отсортировано по ROAS безубыточности"},
+badTitle:{tr:"Elden geçir",en:"Needs fixing",es:"Revisar",de:"Überarbeiten",ru:"Требует внимания"},
+goodTitle:{tr:"Ölçekle",en:"Scale up",es:"Escalar",de:"Skalieren",ru:"Масштабировать"},
+emptyBad:{tr:"Başabaşın altında kalan bir şey yok. İyi durumdasın.",en:"Nothing is below break-even. You are in good shape.",es:"Nada está por debajo del equilibrio. Vas bien.",de:"Nichts liegt unter dem Break-even. Alles gut.",ru:"Ничего ниже точки безубыточности. Всё хорошо."},
+emptyGood:{tr:"Henüz net kâr üreten bir satır yok.",en:"No row is producing a net profit yet.",es:"Todavía ninguna fila genera beneficio neto.",de:"Noch bringt keine Zeile Nettogewinn.",ru:"Пока ни одна строка не приносит чистой прибыли."},
+
+/* --- durum etiketleri --- */
+stStop:{tr:"Durdur",en:"Stop",es:"Parar",de:"Stoppen",ru:"Остановить"},
+stFix:{tr:"Zararda",en:"Losing",es:"En pérdidas",de:"Verlust",ru:"Убыток"},
+stWatch:{tr:"Başabaş",en:"Break-even",es:"En equilibrio",de:"Break-even",ru:"На нуле"},
+stOk:{tr:"Kârda",en:"Profitable",es:"Rentable",de:"Profitabel",ru:"Прибыль"},
+stScale:{tr:"Ölçekle",en:"Scale",es:"Escalar",de:"Skalieren",ru:"Масштаб"},
+stLow:{tr:"Az veri",en:"Low data",es:"Pocos datos",de:"Wenig Daten",ru:"Мало данных"},
+
+/* --- gerekçe cümleleri --- */
+rsLow:{tr:"Sadece {spend} harcandı — karar vermek için erken.",en:"Only {spend} spent — too early to judge.",es:"Solo se gastaron {spend}: es pronto para decidir.",de:"Nur {spend} ausgegeben — für ein Urteil zu früh.",ru:"Потрачено всего {spend} — рано делать выводы."},
+rsNoSale:{tr:"{spend} harcandı, hiç satış gelmedi. En hızlı kazanç burayı kapatmak.",en:"{spend} spent, not a single sale. Turning this off is the fastest win.",es:"{spend} gastados y ninguna venta. Apagarlo es la victoria más rápida.",de:"{spend} ausgegeben, kein einziger Verkauf. Abschalten ist der schnellste Gewinn.",ru:"Потрачено {spend}, продаж нет. Самый быстрый выигрыш — отключить."},
+rsStop:{tr:"ROAS {roas}, başabaş {be} çok altında. Yaklaşık {loss} zarar.",en:"ROAS {roas}, far below break-even {be}. About {loss} lost.",es:"ROAS {roas}, muy por debajo del equilibrio {be}. Unos {loss} de pérdida.",de:"ROAS {roas}, weit unter dem Break-even {be}. Rund {loss} Verlust.",ru:"ROAS {roas} — намного ниже безубыточности {be}. Убыток около {loss}."},
+rsFix:{tr:"ROAS {roas}, başabaşın altında. Yaklaşık {loss} zarar.",en:"ROAS {roas}, below break-even. About {loss} lost.",es:"ROAS {roas}, por debajo del equilibrio. Unos {loss} de pérdida.",de:"ROAS {roas}, unter dem Break-even. Rund {loss} Verlust.",ru:"ROAS {roas} — ниже безубыточности. Убыток около {loss}."},
+rsWatch:{tr:"ROAS {roas} başabaşa çok yakın; küçük bir düşüşte zarara geçer.",en:"ROAS {roas} sits right on break-even; a small dip puts it in the red.",es:"ROAS {roas} está justo en el equilibrio; una pequeña caída lo pone en pérdidas.",de:"ROAS {roas} liegt genau am Break-even; ein kleiner Rückgang bringt Verlust.",ru:"ROAS {roas} — прямо на грани; небольшое падение, и убыток."},
+rsScale:{tr:"ROAS {roas} — {profit} net kâr. Bütçeyi artırmak için en güçlü aday.",en:"ROAS {roas} — {profit} net profit. The strongest candidate for more budget.",es:"ROAS {roas} — {profit} de beneficio neto. El mejor candidato para más presupuesto.",de:"ROAS {roas} — {profit} Nettogewinn. Der beste Kandidat für mehr Budget.",ru:"ROAS {roas} — чистая прибыль {profit}. Лучший кандидат на рост бюджета."},
+rsOk:{tr:"ROAS {roas} — {profit} net kâr.",en:"ROAS {roas} — {profit} net profit.",es:"ROAS {roas} — {profit} de beneficio neto.",de:"ROAS {roas} — {profit} Nettogewinn.",ru:"ROAS {roas} — чистая прибыль {profit}."},
+
+/* --- tablo --- */
+tableTitle:{tr:"Tüm satırlar",en:"All rows",es:"Todas las filas",de:"Alle Zeilen",ru:"Все строки"},
+segAria:{tr:"Gruplama düzeyi",en:"Grouping level",es:"Nivel de agrupación",de:"Gruppierungsebene",ru:"Уровень группировки"},
+segCampaign:{tr:"Kampanya",en:"Campaign",es:"Campaña",de:"Kampagne",ru:"Кампания"},
+segAdset:{tr:"Reklam seti",en:"Ad set",es:"Conjunto",de:"Anzeigengruppe",ru:"Группа объявлений"},
+segAd:{tr:"Reklam",en:"Ad",es:"Anuncio",de:"Anzeige",ru:"Объявление"},
+thName:{tr:"Ad",en:"Name",es:"Nombre",de:"Name",ru:"Название"},
+thStatus:{tr:"Durum",en:"Status",es:"Estado",de:"Status",ru:"Статус"},
+thSpend:{tr:"Harcama",en:"Spend",es:"Gasto",de:"Ausgaben",ru:"Расход"},
+thRevenue:{tr:"Gelir",en:"Revenue",es:"Ingresos",de:"Umsatz",ru:"Выручка"},
+thPurchases:{tr:"Satın alma",en:"Purchases",es:"Compras",de:"Käufe",ru:"Покупки"},
+thCpa:{tr:"Sipariş maliyeti",en:"Cost per order",es:"Coste por pedido",de:"Kosten/Bestellung",ru:"Цена заказа"},
+thNet:{tr:"Net kâr",en:"Net profit",es:"Beneficio neto",de:"Nettogewinn",ru:"Чистая прибыль"},
+thRoas:{tr:"ROAS",en:"ROAS",es:"ROAS",de:"ROAS",ru:"ROAS"},
+thRoasHint:{tr:"(orta çizgi = başabaş)",en:"(centre line = break-even)",es:"(línea central = equilibrio)",de:"(Mittellinie = Break-even)",ru:"(средняя линия — безубыточность)"},
+
+/* --- alt bilgi --- */
+footerHowB:{tr:"Nasıl okunur.",en:"How to read this.",es:"Cómo leerlo.",de:"So liest du das.",ru:"Как это читать."},
+footerHowText:{tr:"Başabaş ROAS = 100 ÷ kâr marjın. ROAS bu sayının altındaysa o reklam para kaybettiriyor. Net kâr = (gelir × kâr marjı) − reklam harcaması; kargo, iade ve sabit giderler dahil değildir.",en:"Break-even ROAS = 100 ÷ your profit margin. Below that number, an ad is losing money. Net profit = (revenue × margin) − ad spend; shipping, returns and fixed costs are not included.",es:"ROAS de equilibrio = 100 ÷ tu margen. Por debajo de esa cifra, un anuncio pierde dinero. Beneficio neto = (ingresos × margen) − gasto en anuncios; no incluye envío, devoluciones ni costes fijos.",de:"Break-even-ROAS = 100 ÷ deine Marge. Darunter macht eine Anzeige Verlust. Nettogewinn = (Umsatz × Marge) − Werbeausgaben; Versand, Retouren und Fixkosten sind nicht enthalten.",ru:"ROAS безубыточности = 100 ÷ ваша маржа. Ниже этого значения реклама убыточна. Чистая прибыль = (выручка × маржа) − расходы на рекламу; доставка, возвраты и постоянные затраты не учтены."},
+footerPrivacyB:{tr:"Gizlilik.",en:"Privacy.",es:"Privacidad.",de:"Datenschutz.",ru:"Конфиденциальность."},
+footerPrivacyText:{tr:"Yüklediğin dosya hiçbir yere gönderilmez; tüm hesaplama bu sayfanın içinde, senin tarayıcında yapılır.",en:"Your file is never uploaded anywhere; every calculation happens inside this page, in your own browser.",es:"Tu archivo no se envía a ningún sitio; todo el cálculo ocurre dentro de esta página, en tu navegador.",de:"Deine Datei wird nirgendwohin gesendet; alle Berechnungen laufen in dieser Seite, in deinem Browser.",ru:"Ваш файл никуда не отправляется; все расчёты происходят внутри страницы, в вашем браузере."},
+
+/* --- paneller --- */
+simpleSub:{tr:"Tek bir Meta terimi kullanmadan, rakamların ne anlama geldiği",en:"What the numbers mean, without a single piece of Meta jargon",es:"Qué significan las cifras, sin una sola palabra técnica de Meta",de:"Was die Zahlen bedeuten — ganz ohne Meta-Fachjargon",ru:"Что означают цифры — без единого термина Meta"},
+glossSub:{tr:"Meta Reklam Yöneticisi'nde karşına çıkan her kelime",en:"Every word you will meet in Meta Ads Manager",es:"Cada palabra que verás en el Administrador de anuncios de Meta",de:"Jedes Wort, das dir im Meta Werbeanzeigenmanager begegnet",ru:"Каждое слово, которое встретится в Meta Ads Manager"},
+glossSearch:{tr:"Terim ara — örneğin: roas, piksel, sıklık",en:"Search a term — try: roas, pixel, frequency",es:"Busca un término — prueba: roas, píxel, frecuencia",de:"Begriff suchen — z. B.: roas, Pixel, Frequenz",ru:"Поиск термина — например: roas, пиксель, частота"},
+glossAria:{tr:"Terim ara",en:"Search a term",es:"Buscar un término",de:"Begriff suchen",ru:"Поиск термина"},
+glossEmpty:{tr:"\"{q}\" için bir karşılık bulamadım. Terimin Türkçesini ya da İngilizcesini denemeyi dene.",en:"No match for \"{q}\". Try the English term or the one Meta shows in your language.",es:"Sin resultados para «{q}». Prueba con el término en español o en inglés.",de:"Kein Treffer für „{q}“. Versuche den deutschen oder den englischen Begriff.",ru:"Ничего не найдено по запросу «{q}». Попробуйте русский или английский термин."},
+gg1:{tr:"Reklamın yapısı",en:"How an ad is built",es:"Cómo se estructura un anuncio",de:"Aufbau einer Anzeige",ru:"Как устроена реклама"},
+gg2:{tr:"Kaç kişi gördü, kaç kişi tıkladı",en:"Who saw it, who clicked",es:"Quién lo vio y quién hizo clic",de:"Wer hat es gesehen, wer geklickt",ru:"Кто увидел и кто кликнул"},
+gg3:{tr:"Maliyet rakamları",en:"Cost figures",es:"Cifras de coste",de:"Kostenkennzahlen",ru:"Показатели затрат"},
+gg4:{tr:"Satış rakamları",en:"Sales figures",es:"Cifras de ventas",de:"Verkaufskennzahlen",ru:"Показатели продаж"},
+gg5:{tr:"Ölçüm ve takip",en:"Tracking and measurement",es:"Medición y seguimiento",de:"Messung und Tracking",ru:"Отслеживание и измерение"},
+gg6:{tr:"Sık duyacağın reklam türleri",en:"Ad types you will hear about",es:"Tipos de anuncios que oirás",de:"Anzeigentypen, von denen du hören wirst",ru:"Типы рекламы, о которых вы услышите"},
+
+/* --- veri güvenliği --- */
+btnTrust:{tr:"Veri güvenliği",en:"Data safety",es:"Seguridad de datos",de:"Datensicherheit",ru:"Безопасность данных"},
+trTitle:{tr:"Verileriniz güvende mi?",en:"Is your data safe?",es:"¿Están seguros tus datos?",de:"Sind deine Daten sicher?",ru:"В безопасности ли ваши данные?"},
+trSub:{tr:"Kısa cevap aşağıda — ve bunu kendiniz nasıl doğrulayacağınız",en:"The short answer is below — and how to verify it yourself",es:"La respuesta corta está abajo — y cómo comprobarlo tú mismo",de:"Die kurze Antwort steht unten — und wie du es selbst prüfst",ru:"Короткий ответ ниже — и как проверить это самому"},
+trShort:{tr:"Yüklediğiniz rapor hiçbir sunucuya gönderilmiyor.",en:"The report you upload is never sent to any server.",es:"El informe que subes nunca se envía a ningún servidor.",de:"Der Bericht, den du hochlädst, wird an keinen Server gesendet.",ru:"Загружаемый отчёт не отправляется ни на один сервер."},
+trShortBody:{tr:"Bu bir söz değil, sayfanın çalışma biçimi. Hesaplama, o an açık olan sekmenin içinde yapılıyor. Aşağıdaki adımlarla bunu 30 saniyede kendi gözünüzle görebilirsiniz.",en:"This is not a promise — it is how the page works. The calculation runs inside the tab you have open. With the steps below you can see it for yourself in 30 seconds.",es:"No es una promesa: es cómo funciona la página. El cálculo ocurre dentro de la pestaña que tienes abierta. Con los pasos de abajo puedes comprobarlo tú mismo en 30 segundos.",de:"Das ist kein Versprechen, sondern die Funktionsweise der Seite. Die Berechnung läuft in dem Tab, den du offen hast. Mit den Schritten unten siehst du es in 30 Sekunden selbst.",ru:"Это не обещание, а принцип работы страницы. Расчёт выполняется внутри открытой вкладки. По шагам ниже вы убедитесь в этом за 30 секунд."},
+trFlowTitle:{tr:"Dosyanızı yüklediğinizde ne oluyor?",en:"What happens when you upload your file?",es:"¿Qué pasa cuando subes tu archivo?",de:"Was passiert, wenn du deine Datei hochlädst?",ru:"Что происходит, когда вы загружаете файл?"},
+trFlow1:{tr:"Dosyayı seçiyorsunuz. Tarayıcı onu bilgisayarınızın içinde okuyor.",en:"You pick the file. Your browser reads it on your own computer.",es:"Eliges el archivo. Tu navegador lo lee dentro de tu propio ordenador.",de:"Du wählst die Datei aus. Dein Browser liest sie auf deinem eigenen Rechner.",ru:"Вы выбираете файл. Браузер читает его прямо на вашем компьютере."},
+trFlow2:{tr:"Hesaplama, sayfanın kendi kodunda, yine sizin bilgisayarınızda yapılıyor.",en:"The calculation runs in the page's own code, still on your machine.",es:"El cálculo se hace con el código de la propia página, siempre en tu equipo.",de:"Die Berechnung läuft im Code der Seite selbst — weiterhin auf deinem Gerät.",ru:"Расчёт выполняется кодом самой страницы, по-прежнему на вашем компьютере."},
+trFlow3:{tr:"Sonuç ekrana çiziliyor.",en:"The result is drawn on your screen.",es:"El resultado se dibuja en tu pantalla.",de:"Das Ergebnis wird auf deinem Bildschirm gezeichnet.",ru:"Результат отображается на вашем экране."},
+trFlow4:{tr:"Sekmeyi kapattığınızda hepsi kayboluyor. Hiçbir yerde kopyası kalmıyor.",en:"When you close the tab it all disappears. No copy is left anywhere.",es:"Al cerrar la pestaña todo desaparece. No queda ninguna copia en ningún sitio.",de:"Wenn du den Tab schließt, ist alles weg. Nirgendwo bleibt eine Kopie.",ru:"Когда вы закрываете вкладку, всё исчезает. Нигде не остаётся копии."},
+trVerifyTitle:{tr:"Kendiniz doğrulayın (30 saniye)",en:"Check it yourself (30 seconds)",es:"Compruébalo tú mismo (30 segundos)",de:"Prüfe es selbst (30 Sekunden)",ru:"Проверьте сами (30 секунд)"},
+trVerifyIntro:{tr:"Yazılım bilmenize gerek yok. Chrome, Edge veya Firefox'ta:",en:"You do not need to know any code. In Chrome, Edge or Firefox:",es:"No necesitas saber programar. En Chrome, Edge o Firefox:",de:"Du brauchst keine Programmierkenntnisse. In Chrome, Edge oder Firefox:",ru:"Программировать не нужно. В Chrome, Edge или Firefox:"},
+trV1:{tr:"<b>F12</b> tuşuna basın. (Ya da sayfaya sağ tıklayıp \"İncele\" deyin.)",en:"Press <b>F12</b>. (Or right-click the page and choose \"Inspect\".)",es:"Pulsa <b>F12</b>. (O haz clic derecho en la página y elige «Inspeccionar».)",de:"Drücke <b>F12</b>. (Oder rechtsklicke auf die Seite und wähle „Untersuchen“.)",ru:"Нажмите <b>F12</b>. (Или правой кнопкой по странице → «Посмотреть код».)"},
+trV2:{tr:"Açılan panelde <b>Network</b> (bazı sürümlerde <b>Ağ</b>) sekmesine geçin.",en:"In the panel that opens, switch to the <b>Network</b> tab.",es:"En el panel que se abre, ve a la pestaña <b>Network</b> (o <b>Red</b>).",de:"Wechsle im geöffneten Panel zum Tab <b>Netzwerk</b> (oder <b>Network</b>).",ru:"В открывшейся панели перейдите на вкладку <b>Network</b> (или <b>Сеть</b>)."},
+trV3:{tr:"Listeyi temizleyin — genelde 🚫 benzeri bir simgeyle. Liste boşalsın.",en:"Clear the list — usually with a 🚫-style icon. The list should go empty.",es:"Limpia la lista — normalmente con un icono tipo 🚫. La lista debe quedar vacía.",de:"Leere die Liste — meist über ein 🚫-Symbol. Die Liste sollte leer sein.",ru:"Очистите список — обычно значком вроде 🚫. Список должен опустеть."},
+trV4:{tr:"Şimdi raporunuzu yükleyin. <b>Liste boş kalır.</b> Tek bir satır bile eklenmez — çünkü dışarı hiçbir şey gitmiyor.",en:"Now upload your report. <b>The list stays empty.</b> Not a single row appears — because nothing is going out.",es:"Ahora sube tu informe. <b>La lista sigue vacía.</b> No aparece ni una fila: no sale nada hacia fuera.",de:"Lade jetzt deinen Bericht hoch. <b>Die Liste bleibt leer.</b> Keine einzige Zeile erscheint — weil nichts nach außen geht.",ru:"Теперь загрузите отчёт. <b>Список останется пустым.</b> Не появится ни одной строки — потому что наружу ничего не уходит."},
+trVerifyNote:{tr:"Aynı testi internet bağlantınızı kapatarak da yapabilirsiniz: CSV dosyaları çevrimdışı da sorunsuz çalışır.",en:"You can run the same test with your internet switched off: CSV files work perfectly offline.",es:"Puedes hacer la misma prueba sin conexión: los archivos CSV funcionan perfectamente offline.",de:"Du kannst denselben Test ohne Internet machen: CSV-Dateien funktionieren auch offline einwandfrei.",ru:"Тот же тест можно сделать с выключенным интернетом: CSV-файлы прекрасно работают офлайн."},
+trHonestTitle:{tr:"Dürüst olalım: şunlar da oluyor",en:"Being straight with you: this does happen",es:"Seamos honestos: esto también ocurre",de:"Ganz ehrlich: das passiert auch",ru:"Будем честны: вот что всё же происходит"},
+trHonest1:{tr:"<b>Sayfa ilk açılırken iki dosya internetten iniyor:</b> yazı tipi (Google Fonts) ve Excel dosyalarını okuyan bir kütüphane (cdnjs). Bunlar herkese aynı gelen genel dosyalar; sizin verinizi taşımazlar, sadece sayfanın düzgün görünmesini ve Excel okuyabilmesini sağlarlar.",en:"<b>Two files are downloaded when the page first loads:</b> the typeface (Google Fonts) and a library that reads Excel files (cdnjs). These are generic files everyone gets; they carry none of your data — they only let the page render properly and open Excel files.",es:"<b>Al abrirse la página se descargan dos archivos:</b> la tipografía (Google Fonts) y una biblioteca que lee archivos de Excel (cdnjs). Son archivos genéricos iguales para todos; no llevan ningún dato tuyo, solo permiten que la página se vea bien y pueda abrir Excel.",de:"<b>Beim ersten Laden der Seite werden zwei Dateien heruntergeladen:</b> die Schrift (Google Fonts) und eine Bibliothek zum Lesen von Excel-Dateien (cdnjs). Das sind allgemeine Dateien, die jeder bekommt; sie enthalten keine deiner Daten — sie sorgen nur für die Darstellung und das Öffnen von Excel-Dateien.",ru:"<b>При первом открытии страницы загружаются два файла:</b> шрифт (Google Fonts) и библиотека для чтения Excel (cdnjs). Это общие файлы, одинаковые для всех; они не несут ваших данных — только обеспечивают внешний вид страницы и чтение Excel."},
+trHonest2:{tr:"<b>Tarayıcınızda saklanan tek şey ayarlarınız:</b> seçtiğiniz dil, tema, kâr marjı ve harcama eşiği. Bunlar sizin tarayıcınızda kalır, bize ulaşmaz ve reklam verinizi içermez.",en:"<b>The only thing stored in your browser is your settings:</b> your chosen language, theme, profit margin and spend threshold. They stay in your browser, never reach us, and contain none of your ad data.",es:"<b>Lo único que se guarda en tu navegador son tus ajustes:</b> idioma, tema, margen de beneficio y umbral de gasto. Se quedan en tu navegador, no llegan hasta nosotros y no contienen datos de tus anuncios.",de:"<b>Das Einzige, was in deinem Browser gespeichert wird, sind deine Einstellungen:</b> Sprache, Design, Marge und Ausgaben-Schwelle. Sie bleiben in deinem Browser, erreichen uns nie und enthalten keine Werbedaten.",ru:"<b>Единственное, что хранится в браузере, — ваши настройки:</b> язык, тема, маржа и порог расходов. Они остаются в вашем браузере, до нас не доходят и не содержат рекламных данных."},
+trCodeTitle:{tr:"Kaynak kodu herkese açık",en:"The source code is public",es:"El código fuente es público",de:"Der Quellcode ist öffentlich",ru:"Исходный код открыт"},
+trCode:{tr:"Bize inanmak zorunda değilsiniz. Bu sayfanın tüm kodu açık; siz ya da güvendiğiniz bir yazılımcı birkaç dakikada kontrol edebilir.",en:"You do not have to take our word for it. All the code for this page is public; you — or any developer you trust — can check it in a few minutes.",es:"No tienes que fiarte de nuestra palabra. Todo el código de esta página es público; tú, o cualquier programador de tu confianza, puede revisarlo en unos minutos.",de:"Du musst uns nicht glauben. Der gesamte Code dieser Seite ist öffentlich; du — oder ein Entwickler deines Vertrauens — kannst ihn in wenigen Minuten prüfen.",ru:"Верить нам на слово не нужно. Весь код страницы открыт; вы или любой знакомый разработчик проверит его за несколько минут."},
+trCodeLink:{tr:"Kodu GitHub'da görüntüle",en:"View the code on GitHub",es:"Ver el código en GitHub",de:"Code auf GitHub ansehen",ru:"Посмотреть код на GitHub"},
+trNeverTitle:{tr:"Sizden hiç istemediklerimiz",en:"What we never ask you for",es:"Lo que nunca te pedimos",de:"Was wir nie von dir verlangen",ru:"Чего мы у вас никогда не просим"},
+trNever1:{tr:"Hesap açmanız gerekmiyor",en:"No account needed",es:"No hace falta crear una cuenta",de:"Kein Konto nötig",ru:"Регистрация не нужна"},
+trNever2:{tr:"E-posta adresiniz istenmiyor",en:"No email address",es:"No pedimos tu correo",de:"Keine E-Mail-Adresse",ru:"Не нужен адрес почты"},
+trNever3:{tr:"Şifre yok",en:"No password",es:"Sin contraseñas",de:"Kein Passwort",ru:"Никаких паролей"},
+trNever4:{tr:"Takip çerezi ve reklam yok",en:"No tracking cookies, no ads",es:"Sin cookies de seguimiento ni anuncios",de:"Keine Tracking-Cookies, keine Werbung",ru:"Никаких трекинг-куки и рекламы"},
+trNever5:{tr:"Ödeme bilgisi istenmiyor",en:"No payment details",es:"No pedimos datos de pago",de:"Keine Zahlungsdaten",ru:"Не нужны платёжные данные"},
+footerVerify:{tr:"Nasıl doğrularım?",en:"How do I verify this?",es:"¿Cómo lo compruebo?",de:"Wie prüfe ich das?",ru:"Как это проверить?"},
+
+/* --- hata mesajları --- */
+errNoRows:{tr:"Dosyada okunabilir satır bulunamadı. Meta'dan rapor indirirken CSV veya Excel biçimini seç.",en:"No readable rows in that file. When you export from Meta, choose the CSV or Excel format.",es:"No hay filas legibles en ese archivo. Al exportar desde Meta, elige el formato CSV o Excel.",de:"Keine lesbaren Zeilen in dieser Datei. Wähle beim Export aus Meta das CSV- oder Excel-Format.",ru:"В файле нет читаемых строк. При выгрузке из Meta выберите формат CSV или Excel."},
+errRead:{tr:"Dosya okunamadı.",en:"The file could not be read.",es:"No se pudo leer el archivo.",de:"Die Datei konnte nicht gelesen werden.",ru:"Не удалось прочитать файл."},
+errExcel:{tr:"Excel dosyalarını açmak için internet bağlantısı gerekiyor.\n\nÇözüm: Meta'dan raporu CSV biçiminde indir, o her koşulda çalışır.",en:"Opening Excel files needs an internet connection.\n\nFix: export the report from Meta as CSV — that always works.",es:"Abrir archivos de Excel requiere conexión a internet.\n\nSolución: exporta el informe de Meta en CSV, que siempre funciona.",de:"Für Excel-Dateien wird eine Internetverbindung benötigt.\n\nLösung: Exportiere den Bericht aus Meta als CSV — das funktioniert immer.",ru:"Для файлов Excel нужен интернет.\n\nРешение: выгрузите отчёт из Meta в формате CSV — он работает всегда."},
+errProcess:{tr:"Dosya işlenirken bir sorun çıktı: {msg}",en:"Something went wrong while processing the file: {msg}",es:"Hubo un problema al procesar el archivo: {msg}",de:"Beim Verarbeiten der Datei ist ein Problem aufgetreten: {msg}",ru:"Ошибка при обработке файла: {msg}"},
+fileFallback:{tr:"rapor",en:"report",es:"informe",de:"Bericht",ru:"отчёт"},
+
+/* --- basitleştirilmiş analiz --- */
+spNoData:{tr:"Henüz yorumlayacak veri yok.",en:"Nothing to interpret yet.",es:"Aún no hay datos que interpretar.",de:"Noch nichts zu deuten.",ru:"Пока нечего анализировать."},
+spNoDataSub:{tr:"Meta Reklam Yöneticisi'nden indirdiğin raporu sayfaya yükle ya da \"Örnek veriye dön\" düğmesine bas; burası o anda dolar.",en:"Upload the report you downloaded from Meta Ads Manager, or press \"Back to sample data\" — this panel fills up straight away.",es:"Sube el informe que descargaste del Administrador de anuncios de Meta o pulsa «Volver al ejemplo»: este panel se llenará al instante.",de:"Lade den Bericht aus dem Meta Werbeanzeigenmanager hoch oder klicke auf „Zurück zu Beispieldaten“ — dieses Panel füllt sich sofort.",ru:"Загрузите отчёт из Meta Ads Manager или нажмите «Вернуться к примеру» — панель тут же заполнится."},
+spVerdictPos:{tr:"Bu dönemde reklamlar sana para kazandırdı.",en:"Over this period your ads made you money.",es:"En este periodo, tus anuncios te hicieron ganar dinero.",de:"In diesem Zeitraum haben deine Anzeigen Geld gebracht.",ru:"За этот период реклама принесла вам деньги."},
+spVerdictNeg:{tr:"Bu dönemde reklamlar sana para kaybettirdi.",en:"Over this period your ads cost you money.",es:"En este periodo, tus anuncios te hicieron perder dinero.",de:"In diesem Zeitraum haben deine Anzeigen Geld gekostet.",ru:"За этот период реклама принесла вам убыток."},
+spBodyPos:{tr:"Reklamlara <strong>{spend}</strong> ödedin. Karşılığında <strong>{rev}</strong> satış oldu. Sattığın ürünlerin kendi maliyetini de düştükten sonra cebinde <strong>{net}</strong> kaldı.",en:"You paid <strong>{spend}</strong> for ads. In return you sold <strong>{rev}</strong>. After subtracting what the products themselves cost you, <strong>{net}</strong> stayed in your pocket.",es:"Pagaste <strong>{spend}</strong> en anuncios. A cambio vendiste <strong>{rev}</strong>. Tras restar lo que te cuestan los productos, te quedaron <strong>{net}</strong>.",de:"Du hast <strong>{spend}</strong> für Anzeigen bezahlt. Dafür hast du <strong>{rev}</strong> verkauft. Nach Abzug der Produktkosten sind <strong>{net}</strong> übrig geblieben.",ru:"Вы заплатили за рекламу <strong>{spend}</strong>. Взамен продали на <strong>{rev}</strong>. После вычета себестоимости товаров у вас осталось <strong>{net}</strong>."},
+spBodyNeg:{tr:"Reklamlara <strong>{spend}</strong> ödedin. Karşılığında <strong>{rev}</strong> satış oldu. Sattığın ürünlerin kendi maliyetini de düştükten sonra <strong>{net}</strong> açık verdin.",en:"You paid <strong>{spend}</strong> for ads. In return you sold <strong>{rev}</strong>. After subtracting what the products themselves cost you, you ended up <strong>{net}</strong> short.",es:"Pagaste <strong>{spend}</strong> en anuncios. A cambio vendiste <strong>{rev}</strong>. Tras restar lo que te cuestan los productos, te quedaste con un déficit de <strong>{net}</strong>.",de:"Du hast <strong>{spend}</strong> für Anzeigen bezahlt. Dafür hast du <strong>{rev}</strong> verkauft. Nach Abzug der Produktkosten fehlen dir am Ende <strong>{net}</strong>.",ru:"Вы заплатили за рекламу <strong>{spend}</strong>. Взамен продали на <strong>{rev}</strong>. После вычета себестоимости товаров вы ушли в минус на <strong>{net}</strong>."},
+spWhereTitle:{tr:"Bu sayı nereden çıktı?",en:"Where does this number come from?",es:"¿De dónde sale esta cifra?",de:"Woher kommt diese Zahl?",ru:"Откуда взялась эта цифра?"},
+spWhereIntro:{tr:"Reklam raporunda gördüğün ciro senin kârın değil. O paranın büyük kısmı zaten ürünün maliyeti. Sıra şöyle işliyor:",en:"The turnover you see in an ad report is not your profit. Most of that money is what the product itself cost. Here is the order it works in:",es:"La facturación que ves en el informe no es tu beneficio. La mayor parte de ese dinero es el coste del producto. El orden es este:",de:"Der Umsatz im Werbebericht ist nicht dein Gewinn. Der größte Teil davon sind die Produktkosten. Die Reihenfolge sieht so aus:",ru:"Оборот в рекламном отчёте — это не ваша прибыль. Большая часть этих денег — себестоимость товара. Порядок такой:"},
+spLedRev:{tr:"Reklamlardan gelen satış",en:"Sales from ads",es:"Ventas generadas por anuncios",de:"Verkäufe durch Anzeigen",ru:"Продажи с рекламы"},
+spLedRevSub:{tr:"{n} siparişin toplam tutarı",en:"the total value of {n} orders",es:"importe total de {n} pedidos",de:"Gesamtwert von {n} Bestellungen",ru:"общая сумма заказов: {n}"},
+spLedCost:{tr:"Ürünlerin maliyeti",en:"What the products cost you",es:"Lo que te cuestan los productos",de:"Kosten der Produkte",ru:"Себестоимость товаров"},
+spLedCostSub:{tr:"Kâr marjını %{m} girdin; yani 100 {s}'lik satışın {r} {s}'si ürüne gidiyor",en:"You entered a {m}% margin, so {r} {s} of every 100 {s} sold goes to the product",es:"Indicaste un margen del {m}%, así que {r} {s} de cada 100 {s} vendidos van al producto",de:"Du hast {m}% Marge angegeben — von je 100 {s} Umsatz gehen {r} {s} an das Produkt",ru:"Вы указали маржу {m}%, значит из каждых 100 {s} продаж {r} {s} уходит на товар"},
+spLedGross:{tr:"Sana kalan ürün kârı",en:"Product profit left to you",es:"Beneficio del producto que te queda",de:"Verbleibender Produktgewinn",ru:"Остающаяся прибыль с товара"},
+spLedSpend:{tr:"Reklamlara ödediğin",en:"What you paid for ads",es:"Lo que pagaste por anuncios",de:"Was du für Anzeigen bezahlt hast",ru:"Оплата рекламы"},
+spLedNetPos:{tr:"Sonuçta kalan",en:"What is left",es:"Lo que queda",de:"Was übrig bleibt",ru:"Что осталось"},
+spLedNetNeg:{tr:"Sonuçtaki açık",en:"The shortfall",es:"El déficit",de:"Das Minus",ru:"Итоговый минус"},
+spRuleTitle:{tr:"Reklama verdiğin 1 {s} kaç {s} satış getirmeli?",en:"How much should each 1 {s} of ad spend bring back?",es:"¿Cuánto debe devolver cada 1 {s} invertido?",de:"Wie viel muss 1 {s} Werbeausgabe zurückbringen?",ru:"Сколько должен приносить каждый потраченный 1 {s}?"},
+spRuleBody:{tr:"Sattığın 1 {s}'nin sadece <strong>{m} {s}</strong>'si sana kalıyor. O yüzden reklam masrafının kendini çıkarması için, verdiğin her 1 {s}'nin en az <strong>{be} {s}</strong> satış getirmesi gerekiyor. Bunun altında kalan bir reklam, satış getiriyor olsa bile sana zarar ettiriyor.",en:"Out of every 1 {s} you sell, only <strong>{m} {s}</strong> stays with you. So for the ad cost to pay for itself, every 1 {s} you spend has to bring back at least <strong>{be} {s}</strong> in sales. Below that, an ad loses you money even though it is making sales.",es:"De cada 1 {s} que vendes, solo <strong>{m} {s}</strong> se queda contigo. Por eso, para que el anuncio se pague solo, cada 1 {s} invertido debe devolver al menos <strong>{be} {s}</strong> en ventas. Por debajo de eso, el anuncio te hace perder dinero aunque venda.",de:"Von jedem verkauften 1 {s} bleiben dir nur <strong>{m} {s}</strong>. Damit sich die Anzeige trägt, muss jeder ausgegebene 1 {s} also mindestens <strong>{be} {s}</strong> Umsatz zurückbringen. Darunter verlierst du Geld, auch wenn die Anzeige verkauft.",ru:"Из каждого проданного 1 {s} вам остаётся только <strong>{m} {s}</strong>. Поэтому, чтобы реклама окупалась, каждый потраченный 1 {s} должен приносить минимум <strong>{be} {s}</strong> продаж. Ниже этого реклама убыточна, даже если продажи идут."},
+spRuleYou:{tr:"Senin ortalaman: verdiğin 1 {s} karşılığında <strong>{avg} {s}</strong> satış. {verdict}",en:"Your average: every 1 {s} spent brings back <strong>{avg} {s}</strong> in sales. {verdict}",es:"Tu media: cada 1 {s} invertido devuelve <strong>{avg} {s}</strong> en ventas. {verdict}",de:"Dein Durchschnitt: 1 {s} Ausgabe bringt <strong>{avg} {s}</strong> Umsatz. {verdict}",ru:"Ваш средний результат: 1 потраченный {s} приносит <strong>{avg} {s}</strong> продаж. {verdict}"},
+spAbove:{tr:"Eşiğin üstündesin.",en:"You are above the threshold.",es:"Estás por encima del umbral.",de:"Du liegst über der Schwelle.",ru:"Вы выше порога."},
+spBelow:{tr:"Eşiğin altındasın — ortalamada zarar ediyorsun.",en:"You are below the threshold — on average you are losing money.",es:"Estás por debajo del umbral: de media pierdes dinero.",de:"Du liegst unter der Schwelle — im Schnitt machst du Verlust.",ru:"Вы ниже порога — в среднем вы в убытке."},
+spSplitTitle:{tr:"Harcadığın para nerelere gitti?",en:"Where did your money go?",es:"¿A dónde fue tu dinero?",de:"Wohin ist dein Geld geflossen?",ru:"Куда ушли ваши деньги?"},
+spBarAria:{tr:"Harcamanın reklam durumuna göre dağılımı",en:"Spend broken down by ad status",es:"Gasto desglosado por estado del anuncio",de:"Ausgaben nach Anzeigenstatus",ru:"Расходы по статусу объявлений"},
+bkGood:{tr:"Kendini çıkaranlar",en:"Paying for themselves",es:"Se pagan solos",de:"Tragen sich selbst",ru:"Окупаются"},
+bkWatch:{tr:"Tam sınırda olanlar",en:"Right on the line",es:"Justo en el límite",de:"Genau an der Grenze",ru:"На грани"},
+bkBad:{tr:"Zarar ettirenler",en:"Losing money",es:"Pierden dinero",de:"Machen Verlust",ru:"Убыточные"},
+bkLow:{tr:"Karar için erken",en:"Too early to judge",es:"Demasiado pronto",de:"Zu früh für ein Urteil",ru:"Рано судить"},
+spLegend:{tr:"{label} — {n} tane, {money} (%{pct})",en:"{label} — {n} of them, {money} ({pct}%)",es:"{label} — {n}, {money} ({pct}%)",de:"{label} — {n} Stück, {money} ({pct}%)",ru:"{label} — {n} шт., {money} ({pct}%)"},
+spBadShare:{tr:"Kırmızı bölüm dikkat etmen gereken yer: paranın <strong>%{pct}</strong>'i, kendini çıkarmayan reklamlara gitmiş.",en:"The red band is the part to watch: <strong>{pct}%</strong> of your money went to ads that do not pay for themselves.",es:"La franja roja es lo que debes vigilar: el <strong>{pct}%</strong> de tu dinero fue a anuncios que no se pagan solos.",de:"Der rote Balken ist der kritische Teil: <strong>{pct}%</strong> deines Geldes ging an Anzeigen, die sich nicht tragen.",ru:"Красная полоса — то, на что стоит смотреть: <strong>{pct}%</strong> денег ушло на рекламу, которая не окупается."},
+spStepsTitle:{tr:"Şimdi ne yapmalısın?",en:"What should you do now?",es:"¿Qué deberías hacer ahora?",de:"Was solltest du jetzt tun?",ru:"Что делать сейчас?"},
+spStepsNone:{tr:"Acil müdahale gerektiren bir şey görünmüyor. Mevcut kurulumu bozmadan devam et.",en:"Nothing needs urgent attention. Keep the current setup as it is.",es:"Nada requiere atención urgente. Mantén la configuración actual.",de:"Nichts erfordert sofortiges Handeln. Lass das aktuelle Setup so.",ru:"Срочных действий не требуется. Оставьте всё как есть."},
+spStopHead:{tr:"«{name}» reklamını kapat.",en:"Turn off «{name}».",es:"Desactiva «{name}».",de:"Schalte «{name}» ab.",ru:"Отключите «{name}»."},
+spStopBody:{tr:"Buna {spend} ödedin ve karşılığında tek bir sipariş bile gelmedi. Kapatman gereken ilk yer burası — bu para doğrudan cebinde kalır.",en:"You paid {spend} for it and not a single order came back. This is the first thing to switch off — that money goes straight back in your pocket.",es:"Pagaste {spend} y no llegó ni un solo pedido. Es lo primero que debes apagar: ese dinero vuelve directo a tu bolsillo.",de:"Du hast {spend} dafür bezahlt und nicht eine einzige Bestellung erhalten. Das ist das Erste, was du abschalten solltest — das Geld bleibt direkt bei dir.",ru:"Вы заплатили {spend}, и не пришло ни одного заказа. Это первое, что нужно выключить — деньги сразу останутся у вас."},
+spFixHead:{tr:"«{name}» reklamını düzelt, düzelmezse kapat.",en:"Fix «{name}», or turn it off.",es:"Arregla «{name}» o apágalo.",de:"Repariere «{name}» — oder schalte es ab.",ru:"Исправьте «{name}», иначе отключите."},
+spFixBody:{tr:"Verdiğin 1 {s} karşılığında {roas} {s} satış geliyor; oysa en az {be} {s} gelmeliydi. Aradaki fark bu dönemde sana yaklaşık {loss} kaybettirdi.",en:"Every 1 {s} you spend brings back {roas} {s} in sales, when it should bring at least {be} {s}. That gap cost you about {loss} this period.",es:"Cada 1 {s} invertido devuelve {roas} {s} en ventas, cuando debería devolver al menos {be} {s}. Esa diferencia te costó unos {loss} este periodo.",de:"Jeder ausgegebene 1 {s} bringt {roas} {s} Umsatz, nötig wären mindestens {be} {s}. Diese Lücke hat dich in diesem Zeitraum rund {loss} gekostet.",ru:"Каждый потраченный 1 {s} приносит {roas} {s} продаж, а должен приносить минимум {be} {s}. Эта разница стоила вам около {loss} за период."},
+spScaleHead:{tr:"«{name}» reklamının bütçesini artır.",en:"Increase the budget on «{name}».",es:"Aumenta el presupuesto de «{name}».",de:"Erhöhe das Budget von «{name}».",ru:"Увеличьте бюджет «{name}»."},
+spScaleBody:{tr:"Verdiğin 1 {s} sana {roas} {s} satış getiriyor ve bu dönemde {profit} net kâr bıraktı. Ama bütçeyi bir seferde %20–30'dan fazla artırma: ani artışlarda Meta reklamı kime göstereceğini baştan öğrenmeye başlar ve sonuçlar geçici olarak bozulur.",en:"Every 1 {s} you spend brings {roas} {s} in sales, and it left {profit} in net profit this period. But do not raise the budget by more than 20–30% at a time: after a sudden jump Meta starts relearning who to show the ad to, and results dip for a while.",es:"Cada 1 {s} invertido trae {roas} {s} en ventas y dejó {profit} de beneficio neto este periodo. Pero no subas el presupuesto más de un 20–30% de golpe: tras un salto brusco, Meta vuelve a aprender a quién mostrar el anuncio y los resultados empeoran un tiempo.",de:"Jeder ausgegebene 1 {s} bringt {roas} {s} Umsatz und hat in diesem Zeitraum {profit} Nettogewinn gebracht. Erhöhe das Budget aber nicht um mehr als 20–30% auf einmal: Nach einem plötzlichen Sprung lernt Meta neu, wem die Anzeige gezeigt wird, und die Ergebnisse brechen vorübergehend ein.",ru:"Каждый потраченный 1 {s} приносит {roas} {s} продаж и дал {profit} чистой прибыли за период. Но не поднимайте бюджет больше чем на 20–30% за раз: после резкого скачка Meta заново учится, кому показывать рекламу, и результаты временно падают."},
+spWatchHead:{tr:"{n} reklamın tam sınırda duruyor.",en:"{n} of your ads sit right on the line.",es:"{n} de tus anuncios están justo en el límite.",de:"{n} deiner Anzeigen liegen genau an der Grenze.",ru:"Объявлений ровно на грани: {n}."},
+spWatchBody:{tr:"Ne kazandırıyor ne kaybettiriyor. Hemen kapatma — önce görselini ya da kime gösterildiğini değiştirip bir hafta izle. Küçük bir iyileşme bunları kâra geçirebilir.",en:"They neither make nor lose money. Do not switch them off yet — change the image or who sees it first, then watch for a week. A small improvement can push them into profit.",es:"Ni ganan ni pierden. No los apagues todavía: cambia la imagen o el público y obsérvalos una semana. Una pequeña mejora puede llevarlos a beneficio.",de:"Sie bringen weder Gewinn noch Verlust. Schalte sie noch nicht ab — ändere zuerst das Bild oder die Zielgruppe und beobachte eine Woche. Eine kleine Verbesserung kann sie in den Gewinn bringen.",ru:"Они ни зарабатывают, ни теряют. Не отключайте сразу — сначала смените креатив или аудиторию и понаблюдайте неделю. Небольшое улучшение выведет их в плюс."},
+spSaving:{tr:"Zarar ettiren reklamları bu dönem hiç çalıştırmamış olsaydın, kârın yaklaşık <b>{amount}</b> daha fazla olacaktı{extra}",en:"If you had not run the loss-making ads at all this period, your profit would have been about <b>{amount}</b> higher{extra}",es:"Si no hubieras puesto en marcha los anuncios deficitarios este periodo, tu beneficio habría sido unos <b>{amount}</b> mayor{extra}",de:"Hättest du die verlustbringenden Anzeigen in diesem Zeitraum gar nicht geschaltet, wäre dein Gewinn rund <b>{amount}</b> höher gewesen{extra}",ru:"Если бы вы вообще не запускали убыточную рекламу, прибыль была бы примерно на <b>{amount}</b> больше{extra}"},
+spSavingFlip:{tr:" ve zarardan kâra geçerdin.",en:" — and you would have finished in profit instead of loss.",es:" y habrías terminado en beneficio en lugar de en pérdidas.",de:" — und du hättest statt Verlust einen Gewinn gemacht.",ru:" — и вы вышли бы в плюс вместо убытка."},
+spCaveatTitle:{tr:"Bu hesapta olmayanlar.",en:"What this calculation leaves out.",es:"Lo que este cálculo no incluye.",de:"Was diese Rechnung nicht enthält.",ru:"Что не учтено в расчёте."},
+spCaveatIntro:{tr:"Rakamlar sadece reklam harcaması ile ürün kârını karşılaştırır. Şunlar dahil değildir:",en:"The figures only compare ad spend against product profit. These are not included:",es:"Las cifras solo comparan el gasto en anuncios con el beneficio del producto. No se incluyen:",de:"Die Zahlen vergleichen nur Werbeausgaben mit dem Produktgewinn. Nicht enthalten sind:",ru:"Цифры сравнивают только расходы на рекламу и прибыль с товара. Не учтены:"},
+spCav1:{tr:"Kargo, paketleme ve iade masrafları",en:"Shipping, packaging and return costs",es:"Envío, embalaje y devoluciones",de:"Versand-, Verpackungs- und Retourenkosten",ru:"Доставка, упаковка и возвраты"},
+spCav2:{tr:"Kredi kartı komisyonu ve Shopify aboneliği gibi sabit giderler",en:"Fixed costs such as card fees and your Shopify subscription",es:"Costes fijos como comisiones de tarjeta y la suscripción de Shopify",de:"Fixkosten wie Kartengebühren und dein Shopify-Abo",ru:"Постоянные расходы: комиссии за платежи, подписка Shopify"},
+spCav3:{tr:"Reklamsız gelen (doğrudan, arama motorundan, sosyal medyadan) satışlar",en:"Sales that arrive without ads — direct, search or organic social",es:"Ventas que llegan sin anuncios: directas, de buscadores o redes",de:"Verkäufe ohne Anzeigen — direkt, über Suche oder organisch",ru:"Продажи без рекламы — прямые, из поиска и органики"},
+spCav4:{tr:"Meta'nın bir satışı kendine mal etme biçimi — Meta'nın yazdığı ciro çoğu zaman Shopify'da gördüğünden yüksek çıkar. İkisi tutmuyorsa hata yapmıyorsun, bu normaldir.",en:"How Meta claims credit for a sale — the revenue Meta reports is usually higher than what you see in Shopify. If the two do not match, you are not doing anything wrong; that is normal.",es:"Cómo Meta se atribuye una venta: los ingresos que reporta Meta suelen ser mayores que los de Shopify. Si no coinciden, no estás haciendo nada mal; es normal.",de:"Wie Meta sich einen Verkauf zuschreibt — der von Meta gemeldete Umsatz liegt meist über dem in Shopify. Wenn beides nicht übereinstimmt, machst du nichts falsch; das ist normal.",ru:"Как Meta приписывает себе продажу — выручка в отчётах Meta обычно выше, чем в Shopify. Если цифры не сходятся, вы не ошиблись, это нормально."}
+};
+
+function t(k, v){
+  var e = STR[k];
+  var s = e ? (e[LANG] != null ? e[LANG] : e.tr) : k;
+  if (v) s = s.replace(/\{(\w+)\}/g, function(m, n){ return v[n] != null ? v[n] : m; });
+  return s;
+}
+
+/* ======================= örnek veri ======================= */
+/* Sayılar tüm dillerde ortak: [harcama, gösterim, tıklama, satın alma, gelir] */
+var DEMO_NUM = [
+  [15240.50, 842310, 12415, 249, 44520],
+  [6980, 401220, 5102, 88, 15340],
+  [4812.75, 128440, 6980, 178, 31560.40],
+  [3140, 96210, 3220, 71, 12880],
+  [9310.20, 512880, 7440, 104, 18620],
+  [5420, 288140, 3910, 23, 4105],
+  [7650, 344600, 8210, 165, 29840.60],
+  [6700, 398120, 4560, 51, 9240],
+  [3280, 610400, 1140, 4, 720],
+  [1850, 142300, 2880, 0, 0],
+  [2140, 220150, 2410, 19, 3420],
+  [1190, 41220, 1980, 54, 9610],
+  [3950, 196740, 2640, 66, 11780],
+  [4460, 262900, 2130, 12, 2180]
+];
+
+var DEMO = {
+tr:{cur:"TRY", fmt:"eu",
+  head:["Kampanya adı","Reklam seti adı","Reklam adı","Harcanan tutar (TRY)","Gösterim","Bağlantı tıklamaları","Satın alımlar","Satın alma dönüşüm değeri","Raporlama başlangıcı","Raporlama bitişi"],
+  names:[
+  ["Advantage+ Alışveriş","Otomatik Yerleşim","Karusel – Çok Satanlar"],
+  ["Advantage+ Alışveriş","Otomatik Yerleşim","Video – Ürün Tanıtım"],
+  ["Retargeting – Sepeti Terk Edenler","Son 7 Gün Sepet","Dinamik Ürün – Hatırlatma"],
+  ["Retargeting – Site Ziyaretçileri","Son 30 Gün","Statik – %10 İndirim"],
+  ["Prospecting – Benzer Kitle %1","LAL %1 – TR","Video – Müşteri Yorumu"],
+  ["Prospecting – İlgi Alanı","Moda & Alışveriş 25-44","Karusel – Yeni Sezon"],
+  ["Katalog – Dinamik Ürün Reklamı","Geniş Katalog","DPA – Tüm Ürünler"],
+  ["Kış İndirimi – Tüm Kitleler","Geniş Kitle TR","Statik – %40 İndirim"],
+  ["Marka Bilinirliği – Video","18-54 Geniş","Video – Marka Filmi"],
+  ["Trafik – Blog Ziyaretçileri","Blog Okuyucuları","Statik – Rehber"],
+  ["Instagram Reels – Genç Kitle","18-24 TR","Reels – Trend Müzik"],
+  ["Sadık Müşteri – E-posta Listesi","Müşteri Listesi Yükleme","Statik – Üyeye Özel"],
+  ["Erkek Giyim – 25-44","Erkek 25-44 TR","Karusel – Erkek Koleksiyon"],
+  ["Yeni Koleksiyon – Lansman","Geniş Kitle","Video – Lansman"]]},
+en:{cur:"USD", fmt:"us",
+  head:["Campaign name","Ad set name","Ad name","Amount spent (USD)","Impressions","Link clicks","Purchases","Purchases conversion value","Reporting starts","Reporting ends"],
+  names:[
+  ["Advantage+ Shopping","Automatic Placements","Carousel – Best Sellers"],
+  ["Advantage+ Shopping","Automatic Placements","Video – Product Demo"],
+  ["Retargeting – Abandoned Cart","Cart, Last 7 Days","Dynamic Product – Reminder"],
+  ["Retargeting – Site Visitors","Last 30 Days","Static – 10% Off"],
+  ["Prospecting – 1% Lookalike Buyers","LAL 1% – US","Video – Customer Review"],
+  ["Prospecting – Interests","Fashion & Shopping 25-44","Carousel – New Season"],
+  ["Catalogue – Dynamic Product Ads","Broad Catalogue","DPA – All Products"],
+  ["Winter Sale – All Audiences","Broad Audience US","Static – 40% Off"],
+  ["Brand Awareness – Video","18-54 Broad","Video – Brand Film"],
+  ["Traffic – Blog Readers","Blog Audience","Static – Guide"],
+  ["Instagram Reels – Young Audience","18-24 US","Reels – Trending Audio"],
+  ["Loyal Customers – Email List","Customer List Upload","Static – Members Only"],
+  ["Menswear – 25-44","Men 25-44 US","Carousel – Men's Collection"],
+  ["New Collection – Launch","Broad Audience","Video – Launch"]]},
+es:{cur:"EUR", fmt:"eu",
+  head:["Nombre de la campaña","Nombre del conjunto de anuncios","Nombre del anuncio","Importe gastado (EUR)","Impresiones","Clics en el enlace","Compras","Valor de conversión de compras","Inicio del informe","Fin del informe"],
+  names:[
+  ["Advantage+ Compras","Ubicaciones automáticas","Carrusel – Más vendidos"],
+  ["Advantage+ Compras","Ubicaciones automáticas","Vídeo – Demo de producto"],
+  ["Retargeting – Carrito abandonado","Carrito, últimos 7 días","Producto dinámico – Recordatorio"],
+  ["Retargeting – Visitantes del sitio","Últimos 30 días","Estático – 10% de descuento"],
+  ["Prospección – Similares 1% compradores","LAL 1% – ES","Vídeo – Opinión de cliente"],
+  ["Prospección – Intereses","Moda y compras 25-44","Carrusel – Nueva temporada"],
+  ["Catálogo – Anuncios dinámicos","Catálogo amplio","DPA – Todos los productos"],
+  ["Rebajas de invierno – Todos","Público amplio ES","Estático – 40% de descuento"],
+  ["Notoriedad de marca – Vídeo","18-54 amplio","Vídeo – Película de marca"],
+  ["Tráfico – Lectores del blog","Público del blog","Estático – Guía"],
+  ["Instagram Reels – Público joven","18-24 ES","Reels – Audio de moda"],
+  ["Clientes fieles – Lista de correo","Carga de lista de clientes","Estático – Solo socios"],
+  ["Moda hombre – 25-44","Hombres 25-44 ES","Carrusel – Colección hombre"],
+  ["Nueva colección – Lanzamiento","Público amplio","Vídeo – Lanzamiento"]]},
+de:{cur:"EUR", fmt:"eu",
+  head:["Kampagnenname","Name der Anzeigengruppe","Anzeigenname","Ausgegebener Betrag (EUR)","Impressionen","Link-Klicks","Käufe","Conversion-Wert für Käufe","Beginn der Berichterstattung","Ende der Berichterstattung"],
+  names:[
+  ["Advantage+ Shopping","Automatische Platzierungen","Karussell – Bestseller"],
+  ["Advantage+ Shopping","Automatische Platzierungen","Video – Produktdemo"],
+  ["Retargeting – Abgebrochene Warenkörbe","Warenkorb, letzte 7 Tage","Dynamisches Produkt – Erinnerung"],
+  ["Retargeting – Website-Besucher","Letzte 30 Tage","Statisch – 10% Rabatt"],
+  ["Prospecting – 1% Lookalike Käufer","LAL 1% – DE","Video – Kundenstimme"],
+  ["Prospecting – Interessen","Mode & Shopping 25-44","Karussell – Neue Saison"],
+  ["Katalog – Dynamische Produktanzeigen","Breiter Katalog","DPA – Alle Produkte"],
+  ["Winterschlussverkauf – Alle","Breite Zielgruppe DE","Statisch – 40% Rabatt"],
+  ["Markenbekanntheit – Video","18-54 breit","Video – Markenfilm"],
+  ["Traffic – Blog-Leser","Blog-Zielgruppe","Statisch – Ratgeber"],
+  ["Instagram Reels – Junge Zielgruppe","18-24 DE","Reels – Trend-Audio"],
+  ["Stammkunden – E-Mail-Liste","Kundenliste hochgeladen","Statisch – Nur für Mitglieder"],
+  ["Herrenmode – 25-44","Männer 25-44 DE","Karussell – Herrenkollektion"],
+  ["Neue Kollektion – Launch","Breite Zielgruppe","Video – Launch"]]},
+ru:{cur:"RUB", fmt:"eu",
+  head:["Название кампании","Название группы объявлений","Название объявления","Потраченная сумма (RUB)","Показы","Клики по ссылке","Покупки","Ценность конверсии покупок","Начало отчета","Конец отчета"],
+  names:[
+  ["Advantage+ Покупки","Автоматические плейсменты","Карусель – Хиты продаж"],
+  ["Advantage+ Покупки","Автоматические плейсменты","Видео – Обзор товара"],
+  ["Ретаргетинг – Брошенная корзина","Корзина, 7 дней","Динамический товар – Напоминание"],
+  ["Ретаргетинг – Посетители сайта","Последние 30 дней","Статика – Скидка 10%"],
+  ["Привлечение – Похожая аудитория 1%","LAL 1% – RU","Видео – Отзыв клиента"],
+  ["Привлечение – Интересы","Мода и покупки 25-44","Карусель – Новый сезон"],
+  ["Каталог – Динамические товары","Широкий каталог","DPA – Все товары"],
+  ["Зимняя распродажа – Все","Широкая аудитория RU","Статика – Скидка 40%"],
+  ["Узнаваемость бренда – Видео","18-54 широкая","Видео – Ролик о бренде"],
+  ["Трафик – Читатели блога","Аудитория блога","Статика – Гид"],
+  ["Instagram Reels – Молодая аудитория","18-24 RU","Reels – Трендовый звук"],
+  ["Постоянные клиенты – Email-база","Загрузка списка клиентов","Статика – Только для своих"],
+  ["Мужская одежда – 25-44","Мужчины 25-44 RU","Карусель – Мужская коллекция"],
+  ["Новая коллекция – Запуск","Широкая аудитория","Видео – Запуск"]]}
+};
+
+function demoFmt(v, style){
+  var s = (v % 1 === 0) ? String(v) : v.toFixed(2);
+  var p = s.split(".");
+  var head = p[0].replace(/\B(?=(\d{3})+(?!\d))/g, style === "eu" ? "." : ",");
+  return p[1] ? head + (style === "eu" ? "," : ".") + p[1] : head;
+}
+
+function demoCSV(){
+  var d = DEMO[LANG] || DEMO.tr;
+  var lines = ['"' + d.head.join('","') + '"'];
+  for (var i = 0; i < DEMO_NUM.length; i++){
+    var n = DEMO_NUM[i], nm = d.names[i];
+    lines.push('"' + nm[0] + '","' + nm[1] + '","' + nm[2] + '","' +
+      demoFmt(n[0], d.fmt) + '","' + demoFmt(n[1], d.fmt) + '","' + demoFmt(n[2], d.fmt) + '","' +
+      n[3] + '","' + demoFmt(n[4], d.fmt) + '","2026-09-01","2026-09-21"');
+  }
+  return lines.join("\n");
+}
+
+/* ======================= durum ======================= */
+var state = {
+  sourceName:"Örnek veri yüklü", isDemo:true,
+  headers:[], rows:[], mapping:{},
+  settings:{margin:40, minSpend:500, currency:"TRY", numfmt:"auto"},
+  groupBy:"campaign",
+  sort:{key:"spend", dir:"desc"}
+};
+
+var FIELDS = [
+  {k:"campaign",    s:"fCampaign"},
+  {k:"adset",       s:"fAdset"},
+  {k:"ad",          s:"fAd"},
+  {k:"spend",       s:"fSpend"},
+  {k:"revenue",     s:"fRevenue"},
+  {k:"purchases",   s:"fPurchases"},
+  {k:"impressions", s:"fImpressions"},
+  {k:"clicks",      s:"fClicks"},
+  {k:"roas",        s:"fRoas"},
+  {k:"date",        s:"fDate"}
+];
+
+/* ======================= yardımcılar ======================= */
+/* Türkçe ı/İ ve Almanca ß elle çözülür; İspanyolca aksanlar ve Almanca
+   umlautlar NFD ile ayrıştırılıp işaretleri atılır; Kiril harfleri korunur. */
+function norm(s){
+  var x = String(s == null ? "" : s)
+    .replace(/İ/g,"I").replace(/ı/g,"i").replace(/ß/g,"ss");
+  if (x.normalize) x = x.normalize("NFD").replace(/[̀-ͯ]/g,"");
+  return x.toLowerCase()
+    .replace(/[^a-z0-9а-яё%+]+/g," ")
+    .trim();
+}
+
+function detectDelimiter(text){
+  var line = text.split(/\r?\n/)[0] || "";
+  var best = ",", bestN = 0, cands = [",",";","\t","|"];
+  for (var i=0;i<cands.length;i++){
+    var n = 0, q = false;
+    for (var j=0;j<line.length;j++){
+      if (line[j] === '"') q = !q;
+      else if (!q && line[j] === cands[i]) n++;
+    }
+    if (n > bestN){ bestN = n; best = cands[i]; }
+  }
+  return best;
+}
+
+function parseCSV(text){
+  if (text.charCodeAt(0) === 0xFEFF) text = text.slice(1);
+  var d = detectDelimiter(text);
+  var rows = [], row = [], field = "", q = false;
+  for (var i=0;i<text.length;i++){
+    var c = text[i];
+    if (q){
+      if (c === '"'){
+        if (text[i+1] === '"'){ field += '"'; i++; } else q = false;
+      } else field += c;
+    } else if (c === '"'){ q = true; }
+    else if (c === d){ row.push(field); field = ""; }
+    else if (c === "\n"){ row.push(field); field = ""; rows.push(row); row = []; }
+    else if (c !== "\r"){ field += c; }
+  }
+  if (field !== "" || row.length){ row.push(field); rows.push(row); }
+  return rows.filter(function(r){
+    return r.some(function(v){ return String(v).trim() !== ""; });
+  });
+}
+
+function toObjects(matrix){
+  if (!matrix.length) return {headers:[], rows:[]};
+  var headers = matrix[0].map(function(h, i){
+    var v = String(h).trim();
+    return v || ("Sütun " + (i+1));
+  });
+  var rows = [];
+  for (var r=1;r<matrix.length;r++){
+    var o = {};
+    for (var c=0;c<headers.length;c++) o[headers[c]] = matrix[r][c] == null ? "" : matrix[r][c];
+    rows.push(o);
+  }
+  return {headers:headers, rows:rows};
+}
+
+function parseNum(v, mode){
+  if (v == null) return 0;
+  if (typeof v === "number") return isFinite(v) ? v : 0;
+  var s = String(v).trim();
+  if (!s) return 0;
+  s = s.replace(/[^\d.,\-]/g, "");
+  if (!s || s === "-") return 0;
+  var neg = s.indexOf("-") === 0;
+  s = s.replace(/-/g, "");
+  var dot = s.lastIndexOf("."), com = s.lastIndexOf(",");
+  var dec = null;
+  if (mode === "tr") dec = ",";
+  else if (mode === "en") dec = ".";
+  else if (dot >= 0 && com >= 0) dec = dot > com ? "." : ",";
+  else if (com >= 0) dec = ((s.match(/,/g)||[]).length === 1 && s.length - com - 1 !== 3) ? "," : null;
+  else if (dot >= 0) dec = ((s.match(/\./g)||[]).length === 1 && s.length - dot - 1 !== 3) ? "." : null;
+  var out;
+  if (dec === ",") out = s.replace(/\./g,"").replace(",", ".");
+  else if (dec === ".") out = s.replace(/,/g,"");
+  else out = s.replace(/[.,]/g,"");
+  var n = parseFloat(out);
+  if (!isFinite(n)) return 0;
+  return neg ? -n : n;
+}
+
+/* ======================= sütun tanıma ======================= */
+/* Rapor hangi dilde inerse insin tanınsın diye desenler beş dili birden kapsar.
+   Not: "adset" kuralı "ad" kuralından ÖNCE gelmeli — yoksa Rusçada
+   "название группы объявлений" yanlışlıkla reklam adı sanılır. */
+var BLOCK_COST = [/basina/,/per /,/maliyet/,/^cost/,/ cost/,/coste/,/kosten/,/стоимост/,/цена/];
+var BLOCK_RATE = [/oran/,/rate/,/ctr/,/процент/];
+
+var RULES = [
+  {k:"date", pats:[
+    /raporlama baslangic/,/reporting start/,/inicio del informe/,/beginn der bericht/,/начало отчет/,
+    /^gun$/,/^day$/,/^dia$/,/^tag$/,/^день$/,
+    /^tarih/,/^date/,/^fecha/,/^datum/,/^дата/], block:[]},
+
+  {k:"campaign", pats:[
+    /kampanya ad/,/campaign name/,/nombre de la campana/,/kampagnenname/,/name der kampagne/,/назван.*кампан/,
+    /^kampanya$/,/^campaign$/,/^campana$/,/^kampagne$/,/^кампания$/],
+    block:[/id$/,/kimlik/,/budget/,/butce/,/ausgab/,/presupuesto/]},
+
+  {k:"adset", pats:[
+    /reklam seti ad/,/ad set name/,/conjunto de anuncios/,/anzeigengruppe/,/групп.*объявлен/,
+    /^reklam seti$/,/^ad set$/], block:[/id$/,/budget/,/butce/]},
+
+  {k:"ad", pats:[
+    /^reklam adi$/,/^ad name$/,/^nombre del anuncio$/,/^anzeigenname$/,/^назван.*объявлен/,
+    /^reklam$/,/^ad$/,/^anuncio$/,/^anzeige$/,/^объявление$/],
+    block:[/id$/,/seti/,/set /,/conjunto/,/gruppe/,/групп/]},
+
+  {k:"revenue", pats:[
+    /(satin al|purchase|donusum|conversion|compra|kauf|конверс|покуп).*(deger|value|valor|wert|ценност)/,
+    /(deger|value|valor|wert|ценност).*(satin al|purchase|compra|kauf|покуп)/,
+    /^gelir/,/^revenue/,/^ingresos/,/^umsatz/,/^выручк/,/^доход/,/^toplam deger/],
+    block:[/roas/].concat(BLOCK_COST)},
+
+  {k:"spend", pats:[
+    /harcanan tutar/,/amount spent/,/importe gastado/,/ausgegebener betrag/,/потрачен/,
+    /^harcama/,/^spend/,/^gasto/,/^ausgaben/,/^расход/,/^затрат/,/^toplam harcama/,/^cost$/],
+    block:[/basina/,/per /,/gunluk/,/daily/,/diario/,/taglich/,/kalan/,/butce/,/budget/,/presupuesto/,/бюджет/].concat(BLOCK_RATE)},
+
+  {k:"purchases", pats:[
+    /^satin alim/,/^satin alma$/,/^satin almalar/,/^purchases?$/,/^website purchases?$/,
+    /^compras$/,/^kaufe$/,/^покупки$/,/^покупок$/,/^satin alma sayisi/],
+    block:[/deger/,/value/,/valor/,/wert/,/ценност/,/roas/].concat(BLOCK_COST, BLOCK_RATE)},
+
+  {k:"roas", pats:[
+    /roas/,/reklam harcamalarinin getirisi/,/return on ad spend/,
+    /rentabilidad.*public/,/werbeausgaben.*rendite/,/рентабельност/], block:[]},
+
+  {k:"impressions", pats:[
+    /^gosterim/,/^impressions?$/,/^impresiones$/,/^impressionen$/,/^показы$/],
+    block:BLOCK_COST.concat(BLOCK_RATE)},
+
+  {k:"clicks", pats:[
+    /^baglanti tiklama/,/^link clicks?/,/^clics en el enlace/,/^link klicks/,/^клики по ссылке/,
+    /^tiklama/,/^clicks?/,/^clics/,/^klicks/,/^клики/],
+    block:[/tekil/,/unique/,/unico/,/eindeutig/,/уникальн/,/tum/,/^all/,/todos/,/alle/,/все/].concat(BLOCK_COST, BLOCK_RATE)}
+];
+
+function autoMap(headers){
+  var used = {}, map = {};
+  var n = headers.map(norm);
+  for (var i=0;i<RULES.length;i++){
+    var rule = RULES[i], found = null;
+    for (var p=0; p<rule.pats.length && found === null; p++){
+      for (var h=0; h<headers.length; h++){
+        if (used[headers[h]]) continue;
+        var nh = n[h];
+        if (!rule.pats[p].test(nh)) continue;
+        var blocked = rule.block.some(function(b){ return b.test(nh); });
+        if (blocked) continue;
+        found = headers[h];
+        break;
+      }
+    }
+    if (found){ map[rule.k] = found; used[found] = true; }
+    else map[rule.k] = null;
+  }
+  return map;
+}
+
+function detectCurrency(headers){
+  var joined = headers.join(" ");
+  if (/USD|\$/i.test(joined)) return "USD";
+  if (/EUR|€/i.test(joined)) return "EUR";
+  if (/GBP|£/i.test(joined)) return "GBP";
+  if (/RUB|RUR|₽|руб/i.test(joined)) return "RUB";
+  if (/TRY|TL|₺/i.test(joined)) return "TRY";
+  return null;
+}
+
+/* ======================= biçimlendirme ======================= */
+function loc(){ return LOCALE[LANG] || "tr-TR"; }
+function money(v, compact){
+  var opt = {style:"currency", currency:state.settings.currency, maximumFractionDigits:0};
+  if (compact && Math.abs(v) >= 100000){ opt.notation = "compact"; opt.maximumFractionDigits = 1; }
+  try { return new Intl.NumberFormat(loc(), opt).format(v); }
+  catch(e){ return Math.round(v).toLocaleString(loc()); }
+}
+function num(v, dec){
+  try { return new Intl.NumberFormat(loc(), {minimumFractionDigits:dec||0, maximumFractionDigits:dec||0}).format(v); }
+  catch(e){ return String(v); }
+}
+function roasStr(v){ return isFinite(v) ? num(v,2) + "×" : "—"; }
+function esc(s){
+  return String(s).replace(/[&<>"]/g, function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];
+  });
+}
+
+/* ======================= hesaplama ======================= */
+function records(){
+  var m = state.mapping, f = state.settings.numfmt, out = [];
+  for (var i=0;i<state.rows.length;i++){
+    var r = state.rows[i];
+    var spend = m.spend ? parseNum(r[m.spend], f) : 0;
+    var revenue = m.revenue ? parseNum(r[m.revenue], f) : 0;
+    if (!m.revenue && m.roas) revenue = parseNum(r[m.roas], f) * spend;
+    out.push({
+      campaign: m.campaign ? String(r[m.campaign]).trim() : "",
+      adset:    m.adset ? String(r[m.adset]).trim() : "",
+      ad:       m.ad ? String(r[m.ad]).trim() : "",
+      spend: spend, revenue: revenue,
+      purchases: m.purchases ? parseNum(r[m.purchases], f) : 0,
+      impressions: m.impressions ? parseNum(r[m.impressions], f) : 0,
+      clicks: m.clicks ? parseNum(r[m.clicks], f) : 0,
+      date: m.date ? String(r[m.date]).trim() : ""
+    });
+  }
+  return out;
+}
+
+function levelKey(rec, level){
+  if (level === "ad" && rec.ad) return rec.ad;
+  if (level === "adset" && rec.adset) return rec.adset;
+  if (rec.campaign) return rec.campaign;
+  return rec.adset || rec.ad || t("noName");
+}
+
+function breakEven(){ return 100 / Math.max(1, state.settings.margin); }
+
+function statusOf(g){
+  var be = breakEven();
+  if (g.spend < state.settings.minSpend) return "low";
+  if (g.revenue <= 0) return "stop";
+  if (g.roas < be * 0.6) return "stop";
+  if (g.roas < be) return "fix";
+  if (g.roas < be * 1.25) return "watch";
+  if (g.roas >= be * 2) return "scale";
+  return "ok";
+}
+
+function groups(){
+  var recs = records(), map = {}, order = [];
+  var margin = state.settings.margin / 100;
+  for (var i=0;i<recs.length;i++){
+    var k = levelKey(recs[i], state.groupBy);
+    if (!map[k]){ map[k] = {name:k, spend:0, revenue:0, purchases:0, impressions:0, clicks:0}; order.push(k); }
+    var g = map[k], r = recs[i];
+    g.spend += r.spend; g.revenue += r.revenue; g.purchases += r.purchases;
+    g.impressions += r.impressions; g.clicks += r.clicks;
+  }
+  return order.map(function(k){
+    var g = map[k];
+    g.roas = g.spend > 0 ? g.revenue / g.spend : 0;
+    g.cpa = g.purchases > 0 ? g.spend / g.purchases : NaN;
+    g.net = g.revenue * margin - g.spend;
+    g.status = statusOf(g);
+    return g;
+  });
+}
+
+var STATUS_KEY = {
+  stop:"stStop", fix:"stFix", watch:"stWatch", ok:"stOk", scale:"stScale", low:"stLow"
+};
+function statusText(s){ return t(STATUS_KEY[s] || "stLow"); }
+
+function reason(g){
+  var be = breakEven();
+  var v = {roas:roasStr(g.roas), be:roasStr(be), spend:money(g.spend),
+           loss:money(-g.net), profit:money(g.net)};
+  if (g.status === "low") return t("rsLow", v);
+  if (g.revenue <= 0) return t("rsNoSale", v);
+  if (g.status === "stop") return t("rsStop", v);
+  if (g.status === "fix") return t("rsFix", v);
+  if (g.status === "watch") return t("rsWatch", v);
+  if (g.status === "scale") return t("rsScale", v);
+  return t("rsOk", v);
+}
+
+/* ======================= çizim ======================= */
+var $ = function(id){ return document.getElementById(id); };
+
+function renderSource(){
+  $("srcName").innerHTML = esc(state.isDemo ? t("demoName") : state.sourceName) +
+    (state.isDemo ? '<span class="tag">' + esc(t("tagDemo")) + "</span>" : "");
+  var recs = records();
+  var dates = recs.map(function(r){ return r.date; }).filter(Boolean).sort();
+  var span = dates.length ? dates[0] + " → " + dates[dates.length-1] : t("noDate");
+  $("srcMeta").textContent = t("srcMeta", {rows:state.rows.length, cols:state.headers.length, span:span});
+  $("rangeHint").textContent = dates.length
+    ? t("rangeHint", {a:dates[0], b:dates[dates.length-1]}) : "";
+}
+
+function renderMapper(){
+  var grid = $("mapGrid");
+  grid.innerHTML = "";
+  FIELDS.forEach(function(f){
+    var wrap = document.createElement("div");
+    wrap.className = "field";
+    var lab = document.createElement("label");
+    lab.textContent = t(f.s);
+    lab.setAttribute("for", "map_" + f.k);
+    var sel = document.createElement("select");
+    sel.id = "map_" + f.k;
+    var opt0 = document.createElement("option");
+    opt0.value = ""; opt0.textContent = t("fieldNone");
+    sel.appendChild(opt0);
+    state.headers.forEach(function(h){
+      var o = document.createElement("option");
+      o.value = h; o.textContent = h;
+      if (state.mapping[f.k] === h) o.selected = true;
+      sel.appendChild(o);
+    });
+    sel.addEventListener("change", function(){
+      state.mapping[f.k] = sel.value || null;
+      render();
+    });
+    wrap.appendChild(lab); wrap.appendChild(sel);
+    grid.appendChild(wrap);
+  });
+  var have = FIELDS.filter(function(f){ return state.mapping[f.k]; }).length;
+  $("mapState").textContent = t("mapperState", {a:have, b:FIELDS.length});
+}
+
+function renderAlert(){
+  var missing = [];
+  if (!state.mapping.spend) missing.push(t("missSpend"));
+  if (!state.mapping.revenue && !state.mapping.roas) missing.push(t("missRevenue"));
+  if (missing.length){
+    $("alert").hidden = false;
+    $("alertText").innerHTML = t("alertMissing", {f:esc(missing.join(t("missJoin")))});
+    $("mapper").open = true;
+  } else {
+    $("alert").hidden = true;
+  }
+}
+
+function renderSummary(gs){
+  var spend = 0, rev = 0, pur = 0;
+  gs.forEach(function(g){ spend += g.spend; rev += g.revenue; pur += g.purchases; });
+  var margin = state.settings.margin / 100;
+  var gross = rev * margin, net = gross - spend;
+  var roas = spend > 0 ? rev / spend : 0;
+  var be = breakEven();
+
+  var el = $("netValue");
+  el.textContent = money(net, true);
+  el.className = "hero-value " + (net >= 0 ? "pos" : "neg");
+  $("netNote").textContent = net >= 0 ? t("netPos") : t("netNeg");
+  $("revValue").textContent = money(rev, true);
+  $("grossValue").textContent = money(gross, true);
+  $("spendValue").textContent = money(spend, true);
+
+  var roasNote = spend <= 0 ? "—"
+    : roas >= be ? t("roasAbove", {p:num((roas/be - 1) * 100, 0)})
+    : t("roasBelow", {p:num((1 - roas/be) * 100, 0)});
+  var unit = t(state.groupBy === "campaign" ? "uCampaign"
+            : state.groupBy === "adset" ? "uAdset" : "uAd");
+
+  var tiles = [
+    {label:t("tSpend"), value:money(spend, true), sub:gs.length + " " + unit},
+    {label:t("tRevenue"), value:money(rev, true), sub:t("tRevenueSub")},
+    {label:"ROAS", value:roasStr(roas), sub:roasNote},
+    {label:t("tPurchases"), value:num(pur, 0), sub:t("tPurchasesSub")},
+    {label:t("tCpa"), value:pur > 0 ? money(spend/pur) : "—", sub:t("tCpaSub")},
+    {label:t("tBe"), value:roasStr(be), sub:t("tBeSub", {m:state.settings.margin})}
+  ];
+  $("tiles").innerHTML = tiles.map(function(x){
+    return '<div class="tile card"><span class="label">' + esc(x.label) + '</span>' +
+           '<span class="value">' + esc(x.value) + '</span>' +
+           '<span class="sub">' + esc(x.sub) + '</span></div>';
+  }).join("");
+
+  $("beNote").innerHTML = t("beNote", {be:roasStr(be), s:sym() || state.settings.currency});
+}
+
+function itemHTML(g){
+  return '<div class="item" data-status="' + g.status + '">' +
+    '<span class="bar" aria-hidden="true"></span>' +
+    '<span class="name">' + esc(g.name) + '</span>' +
+    '<span class="why">' + esc(reason(g)) + '</span>' +
+  '</div>';
+}
+
+function renderActions(gs){
+  var bad = gs.filter(function(g){ return g.status === "stop" || g.status === "fix"; })
+              .sort(function(a,b){ return a.net - b.net; }).slice(0, 6);
+  var good = gs.filter(function(g){ return g.status === "scale" || g.status === "ok"; })
+               .sort(function(a,b){ return b.net - a.net; }).slice(0, 6);
+  $("badCount").textContent = gs.filter(function(g){ return g.status === "stop" || g.status === "fix"; }).length;
+  $("goodCount").textContent = gs.filter(function(g){ return g.status === "scale" || g.status === "ok"; }).length;
+  $("badList").innerHTML = bad.length ? bad.map(itemHTML).join("")
+    : '<p class="empty-note">' + esc(t("emptyBad")) + "</p>";
+  $("goodList").innerHTML = good.length ? good.map(itemHTML).join("")
+    : '<p class="empty-note">' + esc(t("emptyGood")) + "</p>";
+}
+
+var COLS = [
+  {k:"name",      s:"thName"},
+  {k:"status",    s:"thStatus"},
+  {k:"spend",     s:"thSpend"},
+  {k:"revenue",   s:"thRevenue"},
+  {k:"roas",      s:"thRoas"},
+  {k:"purchases", s:"thPurchases"},
+  {k:"cpa",       s:"thCpa"},
+  {k:"net",       s:"thNet"}
+];
+var STATUS_RANK = {stop:0, fix:1, watch:2, low:3, ok:4, scale:5};
+
+function renderTable(gs){
+  var s = state.sort;
+  var sorted = gs.slice().sort(function(a,b){
+    var av, bv;
+    if (s.key === "name"){ return (s.dir === "asc" ? 1 : -1) * String(a.name).localeCompare(String(b.name), loc()); }
+    if (s.key === "status"){ av = STATUS_RANK[a.status]; bv = STATUS_RANK[b.status]; }
+    else { av = a[s.key]; bv = b[s.key]; }
+    if (!isFinite(av)) av = -Infinity;
+    if (!isFinite(bv)) bv = -Infinity;
+    return (s.dir === "asc" ? 1 : -1) * (av - bv);
+  });
+
+  $("thead").innerHTML = COLS.map(function(c){
+    var active = s.key === c.k;
+    var aria = active ? ' aria-sort="' + (s.dir === "asc" ? "ascending" : "descending") + '"' : "";
+    var arrow = active ? '<span class="ar">' + (s.dir === "asc" ? "▲" : "▼") + "</span>" : "";
+    var title = c.k === "roas"
+      ? 'ROAS <span style="text-transform:none;letter-spacing:0">' + esc(t("thRoasHint")) + "</span>"
+      : esc(t(c.s));
+    return "<th" + aria + '><button type="button" data-k="' + c.k + '">' + title + arrow + "</button></th>";
+  }).join("");
+
+  var be = breakEven(), max = be * 2;
+  $("tbody").innerHTML = sorted.map(function(g){
+    var pct = Math.max(2, Math.min(100, (g.roas / max) * 100));
+    return "<tr>" +
+      "<td>" + esc(g.name) + "</td>" +
+      '<td><span class="chip" data-status="' + g.status + '"><span class="dot"></span>' + esc(statusText(g.status)) + "</span></td>" +
+      '<td class="strong">' + esc(money(g.spend)) + "</td>" +
+      "<td>" + esc(money(g.revenue)) + "</td>" +
+      '<td data-status="' + g.status + '"><span class="roascell">' + esc(roasStr(g.roas)) +
+        '<span class="meter"><i style="width:' + pct.toFixed(1) + '%"></i></span></span></td>' +
+      "<td>" + esc(num(g.purchases, 0)) + "</td>" +
+      "<td>" + (isFinite(g.cpa) ? esc(money(g.cpa)) : "—") + "</td>" +
+      '<td class="' + (g.net >= 0 ? "pos" : "neg") + '">' + esc(money(g.net)) + "</td>" +
+    "</tr>";
+  }).join("");
+
+  Array.prototype.forEach.call($("thead").querySelectorAll("button"), function(b){
+    b.addEventListener("click", function(){
+      var k = b.getAttribute("data-k");
+      if (state.sort.key === k) state.sort.dir = state.sort.dir === "asc" ? "desc" : "asc";
+      else { state.sort.key = k; state.sort.dir = (k === "name") ? "asc" : "desc"; }
+      render();
+    });
+  });
+}
+
+function render(){
+  var gs = groups();
+  renderSource();
+  renderMapper();
+  renderAlert();
+  renderSummary(gs);
+  renderActions(gs);
+  renderTable(gs);
+  saveSettings();
+}
+
+/* ======================= veri yükleme ======================= */
+function loadMatrix(matrix, name, isDemo){
+  var o = toObjects(matrix);
+  if (!o.rows.length){
+    alert(t("errNoRows"));
+    return;
+  }
+  state.headers = o.headers;
+  state.rows = o.rows;
+  state.mapping = autoMap(o.headers);
+  state.sourceName = name;
+  state.isDemo = !!isDemo;
+  var cur = detectCurrency(o.headers);
+  if (cur){ state.settings.currency = cur; $("currency").value = cur; }
+  render();
+}
+
+function loadDemo(){
+  loadMatrix(parseCSV(demoCSV()), t("demoName"), true);
+}
+
+function handleFile(file){
+  if (!file) return;
+  var name = file.name || t("fileFallback");
+  var isExcel = /\.xlsx?$/i.test(name);
+  var reader = new FileReader();
+  reader.onerror = function(){ alert(t("errRead")); };
+  reader.onload = function(){
+    try {
+      if (isExcel){
+        if (typeof XLSX === "undefined"){
+          alert(t("errExcel"));
+          return;
+        }
+        var wb = XLSX.read(new Uint8Array(reader.result), {type:"array"});
+        var sheet = wb.Sheets[wb.SheetNames[0]];
+        var matrix = XLSX.utils.sheet_to_json(sheet, {header:1, raw:true, defval:""});
+        matrix = matrix.filter(function(r){
+          return r.some(function(v){ return String(v).trim() !== ""; });
+        });
+        loadMatrix(matrix, name, false);
+      } else {
+        var buf = reader.result;
+        var text = new TextDecoder("utf-8").decode(buf);
+        if (text.indexOf("�") >= 0){
+          try { text = new TextDecoder("windows-1254").decode(buf); } catch(e){}
+        }
+        loadMatrix(parseCSV(text), name, false);
+      }
+    } catch(err){
+      alert(t("errProcess", {msg:err.message}));
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+/* ======================= ayarlar ======================= */
+function saveSettings(){
+  try { localStorage.setItem("mrkp_settings", JSON.stringify(state.settings)); } catch(e){}
+}
+function loadSettings(){
+  try {
+    var raw = localStorage.getItem("mrkp_settings");
+    if (!raw) return;
+    var s = JSON.parse(raw);
+    if (s && typeof s === "object"){
+      if (s.margin) state.settings.margin = s.margin;
+      if (typeof s.minSpend === "number") state.settings.minSpend = s.minSpend;
+      if (s.currency) state.settings.currency = s.currency;
+      if (s.numfmt) state.settings.numfmt = s.numfmt;
+    }
+  } catch(e){}
+}
+function loadTheme(){
+  try {
+    var t = localStorage.getItem("mrkp_theme");
+    if (t === "dark" || t === "light") document.documentElement.setAttribute("data-theme", t);
+  } catch(e){}
+  syncThemeBtn();
+}
+function syncThemeBtn(){
+  var th = document.documentElement.getAttribute("data-theme");
+  var dark = th === "dark" || (!th && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+  $("themeText").textContent = dark ? t("themeLight") : t("themeDark");
+  $("themeIcon").textContent = dark ? "☼" : "◐";
+}
+
+/* ======================= dil ======================= */
+function setText(id, key){ var el = $(id); if (el) el.textContent = t(key); }
+
+function applyI18n(){
+  document.documentElement.lang = LANG;
+  document.title = t("brandTitle");
+
+  ["dropTitle","dropDesc","brandTitle","brandTagline","mapperLabel",
+   "marginLabel","marginSub","minSpendLabel","minSpendSub",
+   "currencyLabel","currencySub","numfmtLabel","numfmtSub",
+   "summaryTitle","netLabel","revLabel","grossLabel","spendLabel",
+   "actionsTitle","actionsHint","tableTitle",
+   "footerHowB","footerHowText","footerPrivacyB","footerPrivacyText"
+  ].forEach(function(id){ setText(id, id); });
+
+  setText("simpleBtnText", "btnSimple");
+  setText("glossBtnText", "btnGloss");
+  setText("badTitleText", "badTitle");
+  setText("goodTitleText", "goodTitle");
+  setText("pickBtn", "btnUpload");
+  setText("demoBtn", "btnDemo");
+  setText("simpleTitleText", "btnSimple");
+  setText("simpleTitleSub", "simpleSub");
+  setText("glossTitleText", "btnGloss");
+  setText("glossTitleSub", "glossSub");
+  setText("trustBtnText", "btnTrust");
+  setText("trustTitleText", "trTitle");
+  setText("trustTitleSub", "trSub");
+  setText("footerTrustLink", "footerVerify");
+
+  $("themeBtn").setAttribute("aria-label", t("themeAria"));
+  $("groupSeg").setAttribute("aria-label", t("segAria"));
+  $("gsearch").setAttribute("placeholder", t("glossSearch"));
+  $("gsearch").setAttribute("aria-label", t("glossAria"));
+  Array.prototype.forEach.call(document.querySelectorAll(".xbtn"), function(b){
+    b.setAttribute("aria-label", t("closeAria"));
+  });
+
+  var segMap = {campaign:"segCampaign", adset:"segAdset", ad:"segAd"};
+  Array.prototype.forEach.call($("groupSeg").querySelectorAll("button"), function(b){
+    b.textContent = t(segMap[b.getAttribute("data-g")]);
+  });
+
+  ["TRY","USD","EUR","GBP","RUB"].forEach(function(c){
+    var o = $("currency").querySelector('option[value="' + c + '"]');
+    if (o) o.textContent = t("cur" + c);
+  });
+  var fa = $("numfmt").querySelector('option[value="auto"]');
+  if (fa) fa.textContent = t("fmtAuto");
+
+  syncThemeBtn();
+}
+
+function setLang(code){
+  if (LANGS.indexOf(code) < 0) code = "tr";
+  LANG = code;
+  $("langSel").value = code;
+  try { localStorage.setItem("mrkp_lang", code); } catch(e){}
+  applyI18n();
+  if (state.isDemo) loadDemo();
+  else render();
+  if ($("glossDlg").open) renderGloss($("gsearch").value);
+  if ($("simpleDlg").open) renderSimple();
+  if ($("trustDlg").open) renderTrust();
+}
+
+function initialLang(){
+  try {
+    var saved = localStorage.getItem("mrkp_lang");
+    if (saved && LANGS.indexOf(saved) >= 0) return saved;
+  } catch(e){}
+  var nav = (navigator.language || "tr").slice(0, 2).toLowerCase();
+  return LANGS.indexOf(nav) >= 0 ? nav : "tr";
+}
+
+/* ======================= basitleştirilmiş analiz ======================= */
+var SYM = {TRY:"₺", USD:"$", EUR:"€", GBP:"£", RUB:"₽"};
+function sym(){ return SYM[state.settings.currency] || ""; }
+
+function renderSimple(){
+  var gs = groups();
+  var margin = state.settings.margin / 100;
+  var spend = 0, rev = 0, pur = 0;
+  gs.forEach(function(g){ spend += g.spend; rev += g.revenue; pur += g.purchases; });
+
+  if (spend <= 0){
+    $("simpleBody").innerHTML = '<div class="verdict"><h3>' + esc(t("spNoData")) + "</h3>" +
+      "<p>" + esc(t("spNoDataSub")) + "</p></div>";
+    return;
+  }
+
+  var gross = rev * margin, net = gross - spend;
+  var be = breakEven(), avg = rev / spend;
+  var s = sym() || state.settings.currency, h = "";
+
+  /* --- tek cümlelik sonuç --- */
+  h += '<div class="verdict" style="--c:' + (net >= 0 ? "var(--good)" : "var(--critical)") + '">' +
+    "<h3>" + esc(t(net >= 0 ? "spVerdictPos" : "spVerdictNeg")) + "</h3><p>" +
+    t(net >= 0 ? "spBodyPos" : "spBodyNeg",
+      {spend:money(spend), rev:money(rev), net:money(net >= 0 ? net : -net)}) +
+    "</p></div>";
+
+  /* --- para nereye gitti --- */
+  h += "<h4>" + esc(t("spWhereTitle")) + "</h4>";
+  h += "<p>" + esc(t("spWhereIntro")) + "</p>";
+  h += '<div class="ledger">' +
+    '<div class="row"><span class="t">' + esc(t("spLedRev")) +
+      "<small>" + esc(t("spLedRevSub", {n:num(pur, 0)})) + "</small></span>" +
+      '<span class="v">' + money(rev) + "</span></div>" +
+    '<div class="row"><span class="t">' + esc(t("spLedCost")) +
+      "<small>" + esc(t("spLedCostSub", {m:state.settings.margin, s:s,
+        r:num(100 - state.settings.margin, 0)})) + "</small></span>" +
+      '<span class="v">− ' + money(rev - gross) + "</span></div>" +
+    '<div class="row"><span class="t">' + esc(t("spLedGross")) + "</span>" +
+      '<span class="v">' + money(gross) + "</span></div>" +
+    '<div class="row"><span class="t">' + esc(t("spLedSpend")) + "</span>" +
+      '<span class="v">− ' + money(spend) + "</span></div>" +
+    '<div class="row total"><span class="t">' + esc(t(net >= 0 ? "spLedNetPos" : "spLedNetNeg")) + "</span>" +
+      '<span class="v" style="color:' + (net >= 0 ? "var(--good-ink)" : "var(--critical-ink)") + '">' +
+      money(net) + "</span></div>" +
+    "</div>";
+
+  /* --- eşik kuralı --- */
+  h += "<h4>" + esc(t("spRuleTitle", {s:s})) + "</h4>";
+  h += "<p>" + t("spRuleBody", {s:s, m:num(margin, 2), be:num(be, 2)}) + "</p>";
+  h += "<p>" + t("spRuleYou", {s:s, avg:num(avg, 2),
+       verdict:esc(t(avg >= be ? "spAbove" : "spBelow"))}) + "</p>";
+
+  /* --- harcamanın dağılımı --- */
+  var B = [
+    {k:"good",  label:t("bkGood"),  c:"var(--good)",     spend:0, n:0},
+    {k:"watch", label:t("bkWatch"), c:"var(--warning)",  spend:0, n:0},
+    {k:"bad",   label:t("bkBad"),   c:"var(--critical)", spend:0, n:0},
+    {k:"low",   label:t("bkLow"),   c:"var(--neutral)",  spend:0, n:0}
+  ];
+  var byKey = {}; B.forEach(function(b){ byKey[b.k] = b; });
+  gs.forEach(function(g){
+    var k = (g.status === "ok" || g.status === "scale") ? "good"
+          : g.status === "watch" ? "watch"
+          : g.status === "low" ? "low" : "bad";
+    byKey[k].spend += g.spend; byKey[k].n++;
+  });
+  var shown = B.filter(function(b){ return b.spend > 0; });
+
+  h += "<h4>" + esc(t("spSplitTitle")) + "</h4>";
+  h += '<div class="sbar" role="img" aria-label="' + esc(t("spBarAria")) + '">' +
+    shown.map(function(b){
+      var pct = (b.spend / spend) * 100;
+      return '<span style="width:' + pct.toFixed(2) + '%;background:' + b.c + '" title="' +
+             esc(b.label) + ": " + esc(money(b.spend)) + '"></span>';
+    }).join("") + "</div>";
+  h += '<div class="slegend">' + shown.map(function(b){
+    return '<span><i style="background:' + b.c + '"></i>' +
+      esc(t("spLegend", {label:b.label, n:b.n, money:money(b.spend),
+                         pct:num((b.spend / spend) * 100, 0)})) + "</span>";
+  }).join("") + "</div>";
+
+  var badB = byKey.bad;
+  if (badB.spend > 0){
+    h += '<p style="margin-top:12px">' +
+      t("spBadShare", {pct:num((badB.spend / spend) * 100, 0)}) + "</p>";
+  }
+
+  /* --- ne yapmalı --- */
+  var bad = gs.filter(function(g){ return g.status === "stop" || g.status === "fix"; })
+              .sort(function(a,b){ return a.net - b.net; });
+  var good = gs.filter(function(g){ return g.status === "scale" || g.status === "ok"; })
+               .sort(function(a,b){ return b.net - a.net; });
+  var watch = gs.filter(function(g){ return g.status === "watch"; });
+  var steps = [];
+
+  bad.slice(0, 3).forEach(function(g){
+    var nm = esc(g.name);
+    if (g.revenue <= 0){
+      steps.push({c:"var(--critical)",
+        b:t("spStopHead", {name:nm}),
+        d:t("spStopBody", {spend:money(g.spend)})});
+    } else {
+      steps.push({c:"var(--critical)",
+        b:t("spFixHead", {name:nm}),
+        d:t("spFixBody", {s:s, roas:num(g.roas, 2), be:num(be, 2), loss:money(-g.net)})});
+    }
+  });
+
+  good.slice(0, 2).forEach(function(g){
+    steps.push({c:"var(--good)",
+      b:t("spScaleHead", {name:esc(g.name)}),
+      d:t("spScaleBody", {s:s, roas:num(g.roas, 2), profit:money(g.net)})});
+  });
+
+  if (watch.length){
+    steps.push({c:"var(--warning)",
+      b:t("spWatchHead", {n:watch.length}),
+      d:t("spWatchBody")});
+  }
+
+  h += "<h4>" + esc(t("spStepsTitle")) + "</h4>";
+  if (!steps.length){
+    h += "<p>" + esc(t("spStepsNone")) + "</p>";
+  } else {
+    h += '<ol class="steps">' + steps.slice(0, 6).map(function(st, i){
+      return '<li><span class="n" style="--c:' + st.c + '">' + (i+1) + "</span>" +
+             '<span class="txt"><b>' + st.b + "</b>" + st.d + "</span></li>";
+    }).join("") + "</ol>";
+  }
+
+  var savable = bad.reduce(function(a, g){ return a + Math.max(0, -g.net); }, 0);
+  if (savable > 0){
+    h += '<div class="saving">' + t("spSaving", {amount:money(savable),
+      extra:(net < 0 && savable > -net) ? t("spSavingFlip") : "."}) + "</div>";
+  }
+
+  /* --- uyarılar --- */
+  h += '<div class="caveat"><b>' + esc(t("spCaveatTitle")) + "</b> " +
+    esc(t("spCaveatIntro")) + "<ul>" +
+    "<li>" + esc(t("spCav1")) + "</li>" +
+    "<li>" + esc(t("spCav2")) + "</li>" +
+    "<li>" + esc(t("spCav3")) + "</li>" +
+    "<li>" + esc(t("spCav4")) + "</li>" +
+    "</ul></div>";
+
+  $("simpleBody").innerHTML = h;
+}
+
+/* ======================= terimler sözlüğü ======================= */
+var GLOSSARY = {
+tr:[
+  {g:"gg1", t:"Kampanya", en:"Campaign", d:"En üstteki katman. Burada Meta'ya ne istediğini söylersin: satış mı, siteye ziyaretçi mi, video izlenmesi mi.", tip:"Shopify satıyorsan hedefin neredeyse her zaman \"Satış\" olmalı. \"Trafik\" seçersen Meta sana tıklayan ama satın almayan kişileri getirir."},
+  {g:"gg1", t:"Reklam seti", en:"Ad set", d:"Kampanyanın içindeki katman. Reklamın kime gösterileceğini, günde ne kadar harcanacağını ve ne kadar süreceğini burada belirlersin."},
+  {g:"gg1", t:"Reklam", en:"Ad", d:"İnsanların ekranında gerçekten gördüğü şey: görsel ya da video, üstündeki yazı ve düğme."},
+  {g:"gg1", t:"Hedef kitle", en:"Audience", d:"Reklamı kimin göreceği. Yaş, yer, ilgi alanı gibi şeylerle tarif edilir."},
+  {g:"gg1", t:"Yerleşim", en:"Placement", d:"Reklamın nerede çıkacağı: Instagram akışı, Reels, Hikâyeler, Facebook akışı, Messenger gibi."},
+  {g:"gg1", t:"Bütçe", en:"Budget", d:"Meta'nın harcamasına izin verdiğin para. Günlük (her gün şu kadar) veya toplam (bu kampanyaya toplamda şu kadar) olabilir."},
+
+  {g:"gg2", t:"Gösterim", en:"Impressions", d:"Reklamının ekranda kaç kez göründüğü. Aynı kişi 5 kez gördüyse bu 5 sayılır."},
+  {g:"gg2", t:"Erişim", en:"Reach", d:"Reklamını kaç <em>farklı</em> kişinin gördüğü. Her zaman gösterimden küçüktür.", tip:"Gösterim 100.000 ama erişim 25.000 ise, ortalama her kişi reklamı 4 kez görmüş demektir."},
+  {g:"gg2", t:"Sıklık", en:"Frequency", d:"Aynı kişinin reklamı ortalama kaç kez gördüğü. Gösterim ÷ Erişim.", tip:"4'ü geçtiyse kitlen yorulmuş olabilir: insanlar aynı reklamı bıkacak kadar görüyor, maliyetler yükselmeye başlar. Ya görseli değiştir ya da kitleyi genişlet."},
+  {g:"gg2", t:"Bağlantı tıklaması", en:"Link clicks", d:"Reklamdan senin siteni açmak için yapılan tıklama sayısı. Beğeni, yorum veya video izleme buna dahil değildir."},
+  {g:"gg2", t:"BTO / Tıklama oranı", en:"CTR", d:"Reklamı görenlerin yüzde kaçının tıkladığı. Reklamın ilgi çekip çekmediğini gösterir.", tip:"Düşükse sorun genelde görselinde veya yazında; yani insanlar reklamı ilgi çekici bulmuyor."},
+
+  {g:"gg3", t:"Harcanan tutar", en:"Amount spent", d:"O reklam için Meta'ya gerçekten ödediğin para."},
+  {g:"gg3", t:"TBM / Tıklama başına maliyet", en:"CPC", d:"Sitene gelen bir ziyaretçinin sana kaça mal olduğu."},
+  {g:"gg3", t:"BGBM / Bin gösterim maliyeti", en:"CPM", d:"Reklamını 1.000 kez göstermenin maliyeti. Aynı kitleye kaç rakibin reklam verdiğinin göstergesidir.", tip:"Yılbaşı, Kara Cuma gibi dönemlerde herkes reklam verdiği için bu rakam yükselir; senin reklamın kötüleştiği için değil."},
+  {g:"gg3", t:"Sipariş başına maliyet", en:"Cost per purchase / CPA", d:"Bir satış elde etmek için harcadığın reklam parası.", tip:"Basit kural: bu rakam, o üründen kazandığın kârdan küçük olmalı. Değilse her satışta para kaybediyorsun."},
+
+  {g:"gg4", t:"Satın alma", en:"Purchases", d:"Meta'nın kendi reklamları sayesinde geldiğini düşündüğü sipariş sayısı."},
+  {g:"gg4", t:"Satın alma dönüşüm değeri", en:"Purchase conversion value", d:"O siparişlerin toplam tutarı — yani ciro.", tip:"Bu senin kârın değil. İçinde ürünün maliyeti de var. Bu panonun \"net kâr\" hesabı tam olarak bunu ayıklar."},
+  {g:"gg4", t:"ROAS", en:"Return on ad spend", d:"Reklam harcamanın getirisi: verdiğin 1 liranın kaç lira <em>ciro</em> getirdiği. 3× demek, 1 liraya 3 lira satış demek.", tip:"En sık yapılan hata: ROAS'ı kâr sanmak. 3× kulağa iyi gelir ama kâr marjın %25 ise başabaş noktan 4×'tir — yani 3× ile zarar ediyorsundur."},
+  {g:"gg4", t:"Başabaş ROAS", en:"Break-even ROAS", d:"Ne kâr ne zarar ettiğin nokta. 100 ÷ kâr marjın ile bulunur.", tip:"Kâr marjın %40 ise başabaş ROAS 2,5'tir. Bu panoda kâr marjını yazdığın anda otomatik hesaplanır."},
+  {g:"gg4", t:"Dönüşüm", en:"Conversion", d:"Senin istediğin eylemin gerçekleşmesi. Genelde satın alma, bazen sepete ekleme veya e-posta bırakma."},
+
+  {g:"gg5", t:"Meta Pikseli", en:"Meta Pixel", d:"Sitene yerleştirilen küçük bir takip kodu. Kimin ne yaptığını Meta'ya bildirir.", tip:"Bu kurulu değilse Meta satışları göremez; raporda satış sıfır görünür, oysa satış olmuştur. Shopify'da \"Facebook & Instagram\" uygulamasıyla kurulur."},
+  {g:"gg5", t:"Dönüşüm API'si", en:"Conversions API / CAPI", d:"Pikselin tarayıcı engellerine takılmaması için satış bilgisinin doğrudan sunucudan Meta'ya gönderilmesi.", tip:"Piksel + Dönüşüm API'si birlikte kullanıldığında Meta satışların daha büyük kısmını görür ve hedeflemesi iyileşir."},
+  {g:"gg5", t:"Atfetme aralığı", en:"Attribution window", d:"Meta'nın bir satışı kendine mal etmek için ne kadar geriye baktığı süre. Varsayılan: tıkladıktan sonra 7 gün, sadece gördükten sonra 1 gün.", tip:"Meta'nın yazdığı ciro Shopify'dakinden yüksekse sebebi çoğunlukla budur. Biri \"reklamı gördü, 5 gün sonra Google'dan girip aldı\" — Meta bunu kendine yazar."},
+  {g:"gg5", t:"Öğrenme aşaması", en:"Learning phase", d:"Yeni bir reklam setinin ilk dönemi. Meta bu sırada reklamı kime göstereceğini deneyerek öğrenir.", tip:"Bu aşamada sonuçlar dalgalıdır. İlk birkaç günün rakamlarına bakıp karar verme; ayrıca sürekli ayar değiştirirsen öğrenme baştan başlar."},
+
+  {g:"gg6", t:"Yeniden hedefleme", en:"Retargeting / Remarketing", d:"Siteni daha önce ziyaret etmiş, ürünü incelemiş veya sepete atıp bırakmış kişilere tekrar reklam gösterme.", tip:"Genelde en yüksek getirili reklamlardır — ama kitlesi küçüktür, tek başına büyümeni sağlamaz."},
+  {g:"gg6", t:"Benzer hedef kitle", en:"Lookalike / LAL", d:"Mevcut müşterilerine davranış olarak benzeyen, seni hiç tanımayan yeni kişiler. \"%1\" en çok benzeyen, en dar grup demektir."},
+  {g:"gg6", t:"Geniş hedefleme", en:"Broad targeting", d:"Kitleyi neredeyse hiç daraltmadan, seçimi Meta'nın algoritmasına bırakmak."},
+  {g:"gg6", t:"Advantage+ Alışveriş", en:"Advantage+ Shopping", d:"Meta'nın hedeflemeyi, yerleşimi ve bütçe dağılımını kendisinin yönettiği otomatik kampanya türü."},
+  {g:"gg6", t:"Katalog / Dinamik ürün reklamı", en:"Catalog / DPA", d:"Ürün listeni Meta'ya bağlarsın, Meta her kişiye ilgilendiği ürünü otomatik gösterir.", tip:"Sepette ürün bırakanlara tam o ürünü göstermenin en etkili yolu budur."},
+  {g:"gg6", t:"Yaratıcı", en:"Creative", d:"Reklamın görsel tarafı: fotoğraf, video, karusel ve üzerindeki yazı.", tip:"Sonucu en çok değiştiren şey genelde hedefleme değil, yaratıcıdır. Bir reklam yorulduğunda ilk denenecek şey yeni görseldir."},
+  {g:"gg6", t:"A/B testi", en:"Split test", d:"İki farklı görseli veya kitleyi aynı anda yarıştırıp hangisinin daha iyi sonuç verdiğini ölçmek."}
+],
+
+en:[
+  {g:"gg1", t:"Campaign", en:"", d:"The top layer. Here you tell Meta what you want: sales, visits to your site, or video views.", tip:"If you sell on Shopify your objective should almost always be \"Sales\". Choose \"Traffic\" and Meta will bring you people who click but do not buy."},
+  {g:"gg1", t:"Ad set", en:"", d:"The layer inside a campaign. You decide who the ad is shown to, how much is spent per day and how long it runs."},
+  {g:"gg1", t:"Ad", en:"", d:"What people actually see on their screen: the image or video, the text above it and the button."},
+  {g:"gg1", t:"Audience", en:"", d:"Who will see the ad. Described by age, location, interests and so on."},
+  {g:"gg1", t:"Placement", en:"", d:"Where the ad appears: Instagram feed, Reels, Stories, Facebook feed, Messenger and more."},
+  {g:"gg1", t:"Budget", en:"", d:"The money you let Meta spend. Either daily (this much every day) or lifetime (this much in total for the campaign)."},
+
+  {g:"gg2", t:"Impressions", en:"", d:"How many times your ad appeared on a screen. If one person saw it 5 times, that counts as 5."},
+  {g:"gg2", t:"Reach", en:"", d:"How many <em>different</em> people saw your ad. Always smaller than impressions.", tip:"100,000 impressions with 25,000 reach means the average person saw the ad 4 times."},
+  {g:"gg2", t:"Frequency", en:"", d:"How many times the same person saw the ad on average. Impressions ÷ Reach.", tip:"Past 4, your audience may be worn out: people are seeing the same ad until they tire of it and costs start climbing. Change the image or widen the audience."},
+  {g:"gg2", t:"Link clicks", en:"", d:"How many clicks went from the ad to your site. Likes, comments and video views are not included."},
+  {g:"gg2", t:"CTR (click-through rate)", en:"", d:"What percentage of the people who saw the ad clicked it. It tells you whether the ad is interesting.", tip:"If it is low the problem is usually the image or the copy — people are not finding the ad compelling."},
+
+  {g:"gg3", t:"Amount spent", en:"", d:"The money you actually paid Meta for that ad."},
+  {g:"gg3", t:"CPC (cost per click)", en:"", d:"What one visitor to your site costs you."},
+  {g:"gg3", t:"CPM (cost per 1,000 impressions)", en:"", d:"What it costs to show your ad 1,000 times. It signals how many competitors are bidding for the same audience.", tip:"It rises around Black Friday and the holidays because everyone is advertising — not because your ad got worse."},
+  {g:"gg3", t:"Cost per purchase", en:"CPA", d:"The ad money you spend to get one sale.", tip:"Simple rule: this number must be smaller than the profit you make on that product. If it is not, you lose money on every sale."},
+
+  {g:"gg4", t:"Purchases", en:"", d:"The number of orders Meta believes came from its own ads."},
+  {g:"gg4", t:"Purchase conversion value", en:"", d:"The total value of those orders — your turnover.", tip:"This is not your profit. The cost of the product is still inside it. The \"net profit\" figure on this dashboard strips exactly that out."},
+  {g:"gg4", t:"ROAS", en:"Return on ad spend", d:"The return on your ad money: how much <em>turnover</em> each 1 you spend brings back. 3× means 1 spent returned 3 in sales.", tip:"The most common mistake is reading ROAS as profit. 3× sounds good, but if your margin is 25% your break-even is 4× — so at 3× you are losing money."},
+  {g:"gg4", t:"Break-even ROAS", en:"", d:"The point where you neither gain nor lose. Found as 100 ÷ your profit margin.", tip:"With a 40% margin, break-even ROAS is 2.5. This dashboard works it out the moment you type your margin."},
+  {g:"gg4", t:"Conversion", en:"", d:"The action you wanted actually happening. Usually a purchase, sometimes an add-to-cart or an email sign-up."},
+
+  {g:"gg5", t:"Meta Pixel", en:"", d:"A small tracking snippet placed on your site. It tells Meta who did what.", tip:"Without it Meta cannot see sales; the report shows zero even though sales happened. On Shopify you install it with the \"Facebook & Instagram\" app."},
+  {g:"gg5", t:"Conversions API", en:"CAPI", d:"Sending purchase data to Meta straight from the server, so it is not blocked by browser restrictions.", tip:"Pixel plus Conversions API together let Meta see more of your sales, which improves its targeting."},
+  {g:"gg5", t:"Attribution window", en:"", d:"How far back Meta looks before claiming a sale as its own. Default: 7 days after a click, 1 day after a view.", tip:"This is usually why Meta's revenue is higher than Shopify's. Someone \"saw the ad, then bought 5 days later via Google\" — Meta still counts it."},
+  {g:"gg5", t:"Learning phase", en:"", d:"The first stretch of a new ad set. Meta is experimenting to learn who to show the ad to.", tip:"Results swing during this phase. Do not judge by the first few days, and note that constant edits restart the learning."},
+
+  {g:"gg6", t:"Retargeting", en:"Remarketing", d:"Showing ads again to people who already visited your site, viewed a product, or added to cart and left.", tip:"Usually your highest-return ads — but the audience is small, so it cannot grow your business on its own."},
+  {g:"gg6", t:"Lookalike audience", en:"LAL", d:"New people who behave like your existing customers but have never heard of you. \"1%\" means the closest, narrowest group."},
+  {g:"gg6", t:"Broad targeting", en:"", d:"Barely narrowing the audience at all and leaving the choice to Meta's algorithm."},
+  {g:"gg6", t:"Advantage+ Shopping", en:"", d:"An automated campaign type where Meta handles targeting, placements and budget distribution itself."},
+  {g:"gg6", t:"Catalogue / Dynamic product ads", en:"DPA", d:"You connect your product list to Meta, and Meta automatically shows each person the product they care about.", tip:"This is the most effective way to show cart abandoners the exact item they left behind."},
+  {g:"gg6", t:"Creative", en:"", d:"The visual side of the ad: photo, video, carousel and the copy on it.", tip:"What usually moves results most is not targeting but the creative. When an ad tires out, a new image is the first thing to try."},
+  {g:"gg6", t:"A/B test", en:"Split test", d:"Running two images or audiences against each other at the same time to measure which performs better."}
+],
+
+es:[
+  {g:"gg1", t:"Campaña", en:"Campaign", d:"La capa superior. Aquí le dices a Meta qué quieres: ventas, visitas a tu web o reproducciones de vídeo.", tip:"Si vendes en Shopify, tu objetivo debería ser casi siempre «Ventas». Si eliges «Tráfico», Meta te traerá gente que hace clic pero no compra."},
+  {g:"gg1", t:"Conjunto de anuncios", en:"Ad set", d:"La capa dentro de la campaña. Aquí decides a quién se muestra el anuncio, cuánto se gasta al día y cuánto dura."},
+  {g:"gg1", t:"Anuncio", en:"Ad", d:"Lo que la gente ve realmente en pantalla: la imagen o el vídeo, el texto y el botón."},
+  {g:"gg1", t:"Público", en:"Audience", d:"Quién verá el anuncio. Se describe por edad, ubicación, intereses y similares."},
+  {g:"gg1", t:"Ubicación", en:"Placement", d:"Dónde aparece el anuncio: feed de Instagram, Reels, Historias, feed de Facebook, Messenger."},
+  {g:"gg1", t:"Presupuesto", en:"Budget", d:"El dinero que dejas gastar a Meta. Diario (esto cada día) o total (esto en toda la campaña)."},
+
+  {g:"gg2", t:"Impresiones", en:"Impressions", d:"Cuántas veces apareció tu anuncio en una pantalla. Si una persona lo vio 5 veces, cuenta como 5."},
+  {g:"gg2", t:"Alcance", en:"Reach", d:"Cuántas personas <em>distintas</em> vieron tu anuncio. Siempre menor que las impresiones.", tip:"100.000 impresiones con 25.000 de alcance significa que cada persona vio el anuncio 4 veces de media."},
+  {g:"gg2", t:"Frecuencia", en:"Frequency", d:"Cuántas veces vio el anuncio la misma persona de media. Impresiones ÷ Alcance.", tip:"Por encima de 4 tu público puede estar saturado: la gente ve el mismo anuncio hasta cansarse y los costes suben. Cambia la imagen o amplía el público."},
+  {g:"gg2", t:"Clics en el enlace", en:"Link clicks", d:"Cuántos clics fueron del anuncio a tu web. No incluye «me gusta», comentarios ni reproducciones."},
+  {g:"gg2", t:"CTR (tasa de clics)", en:"CTR", d:"Qué porcentaje de quienes vieron el anuncio hizo clic. Indica si el anuncio resulta interesante.", tip:"Si es bajo, el problema suele estar en la imagen o en el texto: la gente no encuentra el anuncio atractivo."},
+
+  {g:"gg3", t:"Importe gastado", en:"Amount spent", d:"El dinero que realmente pagaste a Meta por ese anuncio."},
+  {g:"gg3", t:"CPC (coste por clic)", en:"CPC", d:"Lo que te cuesta un visitante en tu web."},
+  {g:"gg3", t:"CPM (coste por mil impresiones)", en:"CPM", d:"Lo que cuesta mostrar tu anuncio 1.000 veces. Indica cuántos competidores pujan por el mismo público.", tip:"Sube en Black Friday y Navidad porque todo el mundo anuncia, no porque tu anuncio haya empeorado."},
+  {g:"gg3", t:"Coste por compra", en:"CPA", d:"El dinero de publicidad que gastas para conseguir una venta.", tip:"Regla simple: esta cifra debe ser menor que el beneficio que te deja ese producto. Si no, pierdes dinero en cada venta."},
+
+  {g:"gg4", t:"Compras", en:"Purchases", d:"El número de pedidos que Meta considera generados por sus propios anuncios."},
+  {g:"gg4", t:"Valor de conversión de compras", en:"Purchase conversion value", d:"El importe total de esos pedidos, es decir, tu facturación.", tip:"No es tu beneficio: dentro sigue estando el coste del producto. El «beneficio neto» de este panel descuenta justo eso."},
+  {g:"gg4", t:"ROAS", en:"Return on ad spend", d:"El retorno de tu inversión publicitaria: cuánta <em>facturación</em> devuelve cada 1 que gastas. 3× significa que 1 invertido devolvió 3 en ventas.", tip:"El error más común es leer el ROAS como beneficio. 3× suena bien, pero con un margen del 25% tu equilibrio está en 4×: a 3× estás perdiendo dinero."},
+  {g:"gg4", t:"ROAS de equilibrio", en:"Break-even ROAS", d:"El punto en el que ni ganas ni pierdes. Se calcula como 100 ÷ tu margen.", tip:"Con un margen del 40%, el ROAS de equilibrio es 2,5. Este panel lo calcula en cuanto escribes tu margen."},
+  {g:"gg4", t:"Conversión", en:"Conversion", d:"Que ocurra la acción que buscabas. Normalmente una compra, a veces añadir al carrito o dejar un correo."},
+
+  {g:"gg5", t:"Píxel de Meta", en:"Meta Pixel", d:"Un pequeño código de seguimiento en tu web. Le cuenta a Meta quién hizo qué.", tip:"Sin él Meta no ve las ventas; el informe marca cero aunque haya habido ventas. En Shopify se instala con la app «Facebook e Instagram»."},
+  {g:"gg5", t:"API de conversiones", en:"Conversions API / CAPI", d:"Enviar los datos de compra a Meta directamente desde el servidor, para que no los bloqueen los navegadores.", tip:"Píxel y API de conversiones juntos permiten a Meta ver más ventas, lo que mejora su segmentación."},
+  {g:"gg5", t:"Ventana de atribución", en:"Attribution window", d:"Cuánto tiempo atrás mira Meta antes de atribuirse una venta. Por defecto: 7 días tras un clic, 1 día tras una visualización.", tip:"Suele ser la razón de que los ingresos de Meta superen a los de Shopify. Alguien «vio el anuncio y compró 5 días después desde Google»: Meta lo cuenta igual."},
+  {g:"gg5", t:"Fase de aprendizaje", en:"Learning phase", d:"El primer tramo de un conjunto de anuncios nuevo. Meta experimenta para aprender a quién mostrarlo.", tip:"Los resultados oscilan en esta fase. No juzgues por los primeros días, y ten en cuenta que cambiar ajustes sin parar reinicia el aprendizaje."},
+
+  {g:"gg6", t:"Retargeting", en:"Retargeting / Remarketing", d:"Volver a mostrar anuncios a quienes ya visitaron tu web, vieron un producto o lo dejaron en el carrito.", tip:"Suelen ser los anuncios más rentables, pero su público es pequeño: por sí solos no te hacen crecer."},
+  {g:"gg6", t:"Público similar", en:"Lookalike / LAL", d:"Personas nuevas que se comportan como tus clientes actuales pero no te conocen. «1%» es el grupo más parecido y más reducido."},
+  {g:"gg6", t:"Segmentación amplia", en:"Broad targeting", d:"Casi no acotar el público y dejar la elección al algoritmo de Meta."},
+  {g:"gg6", t:"Advantage+ Compras", en:"Advantage+ Shopping", d:"Tipo de campaña automática en la que Meta gestiona por su cuenta la segmentación, las ubicaciones y el reparto del presupuesto."},
+  {g:"gg6", t:"Catálogo / Anuncios dinámicos", en:"Catalog / DPA", d:"Conectas tu lista de productos a Meta y Meta muestra a cada persona el producto que le interesa.", tip:"Es la forma más eficaz de enseñar a quien abandonó el carrito exactamente el artículo que dejó."},
+  {g:"gg6", t:"Creatividad", en:"Creative", d:"La parte visual del anuncio: foto, vídeo, carrusel y el texto que lleva.", tip:"Lo que más suele mover los resultados no es la segmentación sino la creatividad. Cuando un anuncio se agota, lo primero que hay que probar es una imagen nueva."},
+  {g:"gg6", t:"Test A/B", en:"Split test", d:"Enfrentar dos imágenes o dos públicos a la vez para medir cuál funciona mejor."}
+],
+
+de:[
+  {g:"gg1", t:"Kampagne", en:"Campaign", d:"Die oberste Ebene. Hier sagst du Meta, was du willst: Verkäufe, Besuche auf deiner Website oder Videoaufrufe.", tip:"Wenn du über Shopify verkaufst, sollte dein Ziel fast immer „Verkäufe“ sein. Wählst du „Traffic“, bringt Meta dir Leute, die klicken, aber nicht kaufen."},
+  {g:"gg1", t:"Anzeigengruppe", en:"Ad set", d:"Die Ebene innerhalb der Kampagne. Hier legst du fest, wem die Anzeige gezeigt wird, wie viel pro Tag ausgegeben wird und wie lange sie läuft."},
+  {g:"gg1", t:"Anzeige", en:"Ad", d:"Das, was die Leute wirklich sehen: Bild oder Video, der Text darüber und der Button."},
+  {g:"gg1", t:"Zielgruppe", en:"Audience", d:"Wer die Anzeige sehen wird. Beschrieben über Alter, Ort, Interessen und Ähnliches."},
+  {g:"gg1", t:"Platzierung", en:"Placement", d:"Wo die Anzeige erscheint: Instagram-Feed, Reels, Stories, Facebook-Feed, Messenger."},
+  {g:"gg1", t:"Budget", en:"Budget", d:"Das Geld, das Meta ausgeben darf. Entweder täglich (so viel pro Tag) oder als Laufzeitbudget (so viel insgesamt)."},
+
+  {g:"gg2", t:"Impressionen", en:"Impressions", d:"Wie oft deine Anzeige auf einem Bildschirm erschienen ist. Hat eine Person sie 5-mal gesehen, zählt das als 5."},
+  {g:"gg2", t:"Reichweite", en:"Reach", d:"Wie viele <em>verschiedene</em> Personen deine Anzeige gesehen haben. Immer kleiner als die Impressionen.", tip:"100.000 Impressionen bei 25.000 Reichweite heißt: Im Schnitt hat jede Person die Anzeige 4-mal gesehen."},
+  {g:"gg2", t:"Frequenz", en:"Frequency", d:"Wie oft dieselbe Person die Anzeige im Schnitt gesehen hat. Impressionen ÷ Reichweite.", tip:"Über 4 ist deine Zielgruppe womöglich ermüdet: Die Leute sehen dieselbe Anzeige, bis sie sie satthaben, und die Kosten steigen. Wechsle das Bild oder erweitere die Zielgruppe."},
+  {g:"gg2", t:"Link-Klicks", en:"Link clicks", d:"Wie viele Klicks von der Anzeige auf deine Website gingen. Likes, Kommentare und Videoaufrufe zählen nicht dazu."},
+  {g:"gg2", t:"CTR (Klickrate)", en:"CTR", d:"Wie viel Prozent derer, die die Anzeige gesehen haben, auch geklickt haben. Zeigt, ob die Anzeige interessant ist.", tip:"Ist sie niedrig, liegt es meist am Bild oder am Text — die Anzeige spricht die Leute nicht an."},
+
+  {g:"gg3", t:"Ausgegebener Betrag", en:"Amount spent", d:"Das Geld, das du Meta für diese Anzeige tatsächlich bezahlt hast."},
+  {g:"gg3", t:"CPC (Kosten pro Klick)", en:"CPC", d:"Was dich ein Besucher auf deiner Website kostet."},
+  {g:"gg3", t:"CPM (Kosten pro 1.000 Impressionen)", en:"CPM", d:"Was es kostet, deine Anzeige 1.000-mal auszuspielen. Ein Hinweis darauf, wie viele Mitbewerber um dieselbe Zielgruppe bieten.", tip:"Rund um Black Friday und Weihnachten steigt der Wert, weil alle werben — nicht weil deine Anzeige schlechter geworden ist."},
+  {g:"gg3", t:"Kosten pro Kauf", en:"CPA", d:"Das Werbegeld, das du für einen Verkauf ausgibst.", tip:"Einfache Regel: Dieser Wert muss kleiner sein als der Gewinn an diesem Produkt. Sonst verlierst du bei jedem Verkauf Geld."},
+
+  {g:"gg4", t:"Käufe", en:"Purchases", d:"Die Zahl der Bestellungen, die Meta den eigenen Anzeigen zuschreibt."},
+  {g:"gg4", t:"Conversion-Wert für Käufe", en:"Purchase conversion value", d:"Der Gesamtwert dieser Bestellungen — also dein Umsatz.", tip:"Das ist nicht dein Gewinn. Die Produktkosten stecken noch darin. Der „Nettogewinn“ in diesem Dashboard rechnet genau das heraus."},
+  {g:"gg4", t:"ROAS", en:"Return on ad spend", d:"Die Rendite deiner Werbeausgaben: wie viel <em>Umsatz</em> jeder ausgegebene 1 zurückbringt. 3× heißt, 1 Ausgabe brachte 3 Umsatz.", tip:"Der häufigste Fehler ist, ROAS für Gewinn zu halten. 3× klingt gut, aber bei 25% Marge liegt dein Break-even bei 4× — bei 3× machst du also Verlust."},
+  {g:"gg4", t:"Break-even-ROAS", en:"Break-even ROAS", d:"Der Punkt, an dem du weder gewinnst noch verlierst. 100 ÷ deine Marge.", tip:"Bei 40% Marge liegt der Break-even-ROAS bei 2,5. Dieses Dashboard rechnet es aus, sobald du deine Marge einträgst."},
+  {g:"gg4", t:"Conversion", en:"Conversion", d:"Dass die gewünschte Handlung tatsächlich passiert. Meist ein Kauf, manchmal ein Warenkorb oder eine E-Mail-Anmeldung."},
+
+  {g:"gg5", t:"Meta-Pixel", en:"Meta Pixel", d:"Ein kleiner Tracking-Code auf deiner Website. Er meldet Meta, wer was getan hat.", tip:"Ohne ihn sieht Meta keine Verkäufe; im Bericht steht null, obwohl verkauft wurde. In Shopify installierst du ihn über die App „Facebook & Instagram“."},
+  {g:"gg5", t:"Conversions API", en:"CAPI", d:"Kaufdaten werden direkt vom Server an Meta geschickt, damit sie nicht an Browser-Sperren scheitern.", tip:"Pixel und Conversions API zusammen lassen Meta mehr deiner Verkäufe sehen, was das Targeting verbessert."},
+  {g:"gg5", t:"Attributionsfenster", en:"Attribution window", d:"Wie weit Meta zurückblickt, um sich einen Verkauf zuzuschreiben. Standard: 7 Tage nach einem Klick, 1 Tag nach einer Ansicht.", tip:"Meist der Grund, warum Metas Umsatz höher ist als der in Shopify. Jemand „sah die Anzeige und kaufte 5 Tage später über Google“ — Meta zählt es trotzdem."},
+  {g:"gg5", t:"Lernphase", en:"Learning phase", d:"Die erste Zeit einer neuen Anzeigengruppe. Meta probiert aus, wem die Anzeige gezeigt werden soll.", tip:"In dieser Phase schwanken die Ergebnisse. Urteile nicht nach den ersten Tagen — und ständiges Ändern startet die Lernphase neu."},
+
+  {g:"gg6", t:"Retargeting", en:"Retargeting / Remarketing", d:"Erneut Anzeigen an Leute ausspielen, die deine Website schon besucht, ein Produkt angesehen oder im Warenkorb liegen gelassen haben.", tip:"Meist die Anzeigen mit der höchsten Rendite — aber die Zielgruppe ist klein, allein bringt sie kein Wachstum."},
+  {g:"gg6", t:"Lookalike Audience", en:"Lookalike / LAL", d:"Neue Leute, die sich wie deine bestehenden Kunden verhalten, dich aber nicht kennen. „1%“ ist die ähnlichste, engste Gruppe."},
+  {g:"gg6", t:"Breites Targeting", en:"Broad targeting", d:"Die Zielgruppe kaum eingrenzen und die Auswahl dem Algorithmus von Meta überlassen."},
+  {g:"gg6", t:"Advantage+ Shopping", en:"Advantage+ Shopping", d:"Automatischer Kampagnentyp, bei dem Meta Targeting, Platzierungen und Budgetverteilung selbst übernimmt."},
+  {g:"gg6", t:"Katalog / Dynamische Produktanzeigen", en:"Catalog / DPA", d:"Du verbindest deine Produktliste mit Meta, und Meta zeigt jeder Person automatisch das passende Produkt.", tip:"Der wirksamste Weg, Warenkorbabbrechern genau den liegengelassenen Artikel zu zeigen."},
+  {g:"gg6", t:"Creative", en:"Creative", d:"Die visuelle Seite der Anzeige: Foto, Video, Karussell und der Text darauf.", tip:"Was die Ergebnisse meist am stärksten bewegt, ist nicht das Targeting, sondern das Creative. Wenn eine Anzeige müde wird, probiere zuerst ein neues Bild."},
+  {g:"gg6", t:"A/B-Test", en:"Split test", d:"Zwei Bilder oder Zielgruppen gleichzeitig gegeneinander laufen lassen und messen, was besser funktioniert."}
+],
+
+ru:[
+  {g:"gg1", t:"Кампания", en:"Campaign", d:"Верхний уровень. Здесь вы говорите Meta, чего хотите: продаж, визитов на сайт или просмотров видео.", tip:"Если вы продаёте через Shopify, цель почти всегда должна быть «Продажи». Выберете «Трафик» — Meta приведёт тех, кто кликает, но не покупает."},
+  {g:"gg1", t:"Группа объявлений", en:"Ad set", d:"Уровень внутри кампании. Здесь задаётся, кому показывать рекламу, сколько тратить в день и как долго её крутить."},
+  {g:"gg1", t:"Объявление", en:"Ad", d:"То, что люди действительно видят на экране: картинка или видео, текст над ним и кнопка."},
+  {g:"gg1", t:"Аудитория", en:"Audience", d:"Кто увидит рекламу. Описывается возрастом, гео, интересами и тому подобным."},
+  {g:"gg1", t:"Плейсмент", en:"Placement", d:"Где показывается реклама: лента Instagram, Reels, Stories, лента Facebook, Messenger."},
+  {g:"gg1", t:"Бюджет", en:"Budget", d:"Деньги, которые вы разрешаете Meta потратить. Дневной (столько каждый день) или на весь срок (столько всего)."},
+
+  {g:"gg2", t:"Показы", en:"Impressions", d:"Сколько раз реклама появилась на экране. Если один человек увидел её 5 раз, это 5 показов."},
+  {g:"gg2", t:"Охват", en:"Reach", d:"Сколько <em>разных</em> людей увидели рекламу. Всегда меньше показов.", tip:"100 000 показов при охвате 25 000 означает, что в среднем каждый человек видел рекламу 4 раза."},
+  {g:"gg2", t:"Частота", en:"Frequency", d:"Сколько раз в среднем один человек видел рекламу. Показы ÷ Охват.", tip:"Больше 4 — аудитория, возможно, выгорает: люди видят одно и то же до усталости, стоимость растёт. Смените креатив или расширьте аудиторию."},
+  {g:"gg2", t:"Клики по ссылке", en:"Link clicks", d:"Сколько кликов привело на ваш сайт. Лайки, комментарии и просмотры видео сюда не входят."},
+  {g:"gg2", t:"CTR (кликабельность)", en:"CTR", d:"Какой процент увидевших рекламу кликнул по ней. Показывает, цепляет ли объявление.", tip:"Если низкий, дело обычно в картинке или тексте — реклама не вызывает интереса."},
+
+  {g:"gg3", t:"Потраченная сумма", en:"Amount spent", d:"Деньги, которые вы реально заплатили Meta за это объявление."},
+  {g:"gg3", t:"CPC (цена клика)", en:"CPC", d:"Во сколько вам обходится один посетитель сайта."},
+  {g:"gg3", t:"CPM (цена за 1000 показов)", en:"CPM", d:"Сколько стоит показать рекламу 1000 раз. Показатель того, сколько конкурентов борются за ту же аудиторию.", tip:"В «чёрную пятницу» и под Новый год он растёт, потому что рекламируются все, — а не потому, что ваша реклама стала хуже."},
+  {g:"gg3", t:"Цена покупки", en:"CPA", d:"Сколько рекламных денег уходит на одну продажу.", tip:"Простое правило: это число должно быть меньше прибыли с товара. Иначе вы теряете деньги на каждой продаже."},
+
+  {g:"gg4", t:"Покупки", en:"Purchases", d:"Количество заказов, которые Meta считает результатом собственной рекламы."},
+  {g:"gg4", t:"Ценность конверсии покупок", en:"Purchase conversion value", d:"Общая сумма этих заказов — то есть ваш оборот.", tip:"Это не прибыль: себестоимость товара всё ещё внутри. «Чистая прибыль» на этой панели вычитает именно её."},
+  {g:"gg4", t:"ROAS", en:"Return on ad spend", d:"Отдача от рекламных расходов: сколько <em>оборота</em> приносит каждый потраченный 1. 3× значит, что 1 вложенный вернул 3 продажами.", tip:"Самая частая ошибка — принимать ROAS за прибыль. 3× звучит хорошо, но при марже 25% точка безубыточности — 4×, то есть при 3× вы в минусе."},
+  {g:"gg4", t:"ROAS безубыточности", en:"Break-even ROAS", d:"Точка, где нет ни прибыли, ни убытка. Считается как 100 ÷ ваша маржа.", tip:"При марже 40% ROAS безубыточности равен 2,5. Панель считает его сразу, как только вы вводите маржу."},
+  {g:"gg4", t:"Конверсия", en:"Conversion", d:"Когда нужное вам действие действительно произошло. Обычно покупка, иногда добавление в корзину или подписка."},
+
+  {g:"gg5", t:"Пиксель Meta", en:"Meta Pixel", d:"Небольшой код отслеживания на вашем сайте. Он сообщает Meta, кто что сделал.", tip:"Без него Meta не видит продаж: в отчёте ноль, хотя продажи были. В Shopify ставится через приложение «Facebook & Instagram»."},
+  {g:"gg5", t:"Conversions API", en:"CAPI", d:"Данные о покупках уходят в Meta прямо с сервера, чтобы их не блокировали браузеры.", tip:"Пиксель вместе с Conversions API позволяет Meta видеть больше продаж, и таргетинг становится точнее."},
+  {g:"gg5", t:"Окно атрибуции", en:"Attribution window", d:"Насколько далеко назад Meta смотрит, чтобы записать продажу себе. По умолчанию: 7 дней после клика, 1 день после просмотра.", tip:"Обычно именно поэтому выручка в Meta выше, чем в Shopify. Человек «увидел рекламу, а купил через 5 дней из Google» — Meta всё равно засчитает это себе."},
+  {g:"gg5", t:"Фаза обучения", en:"Learning phase", d:"Первый период новой группы объявлений. Meta пробует и учится, кому показывать рекламу.", tip:"В этой фазе результаты скачут. Не судите по первым дням, а постоянные правки запускают обучение заново."},
+
+  {g:"gg6", t:"Ретаргетинг", en:"Retargeting / Remarketing", d:"Повторный показ рекламы тем, кто уже заходил на сайт, смотрел товар или бросил корзину.", tip:"Обычно самая доходная реклама, но аудитория маленькая — сама по себе роста не даст."},
+  {g:"gg6", t:"Похожая аудитория", en:"Lookalike / LAL", d:"Новые люди, которые ведут себя как ваши покупатели, но вас не знают. «1%» — самая близкая и узкая группа."},
+  {g:"gg6", t:"Широкий таргетинг", en:"Broad targeting", d:"Почти не сужать аудиторию и оставить выбор алгоритму Meta."},
+  {g:"gg6", t:"Advantage+ Покупки", en:"Advantage+ Shopping", d:"Автоматический тип кампании, где Meta сама управляет таргетингом, плейсментами и распределением бюджета."},
+  {g:"gg6", t:"Каталог / Динамические товары", en:"Catalog / DPA", d:"Вы подключаете список товаров к Meta, и она автоматически показывает каждому нужный товар.", tip:"Самый действенный способ показать бросившему корзину именно тот товар, который он оставил."},
+  {g:"gg6", t:"Креатив", en:"Creative", d:"Визуальная часть рекламы: фото, видео, карусель и текст на них.", tip:"Сильнее всего на результат обычно влияет не таргетинг, а креатив. Когда объявление выгорает, первым делом пробуют новую картинку."},
+  {g:"gg6", t:"A/B-тест", en:"Split test", d:"Одновременно запустить два креатива или две аудитории и измерить, что работает лучше."}
+]
+};
+
+function renderGloss(q){
+  var list = GLOSSARY[LANG] || GLOSSARY.tr;
+  var f = norm(q || "");
+  var items = !f ? list : list.filter(function(it){
+    return norm(it.t + " " + (it.en || "") + " " + it.d + " " + (it.tip || "")).indexOf(f) >= 0;
+  });
+  if (!items.length){
+    $("glossBody").innerHTML = '<p class="gempty">' + esc(t("glossEmpty", {q:q})) + "</p>";
+    return;
+  }
+  var out = "", last = null;
+  items.forEach(function(it){
+    if (it.g !== last){
+      if (last !== null) out += "</div>";
+      out += '<div class="ggroup"><span class="eyebrow">' + esc(t(it.g)) + "</span>";
+      last = it.g;
+    }
+    var alt = (it.en && it.en !== it.t) ? '<span class="en">' + esc(it.en) + "</span>" : "";
+    out += '<div class="gitem"><div class="term">' + esc(it.t) + alt + "</div>" +
+      '<div class="def">' + it.d + "</div>" +
+      (it.tip ? '<div class="tip">' + it.tip + "</div>" : "") + "</div>";
+  });
+  out += "</div>";
+  $("glossBody").innerHTML = out;
+}
+
+/* ======================= veri güvenliği paneli ======================= */
+/* Depo adresi belli olunca buraya yazılacak; boşsa kod bağlantısı gizlenir. */
+var REPO_URL = "";
+
+function renderTrust(){
+  var h = "";
+  h += '<div class="trustbox"><h3>' + esc(t("trShort")) + "</h3><p>" +
+       esc(t("trShortBody")) + "</p></div>";
+
+  h += "<h4>" + esc(t("trFlowTitle")) + "</h4>";
+  h += '<ol class="tlist">' + ["trFlow1","trFlow2","trFlow3","trFlow4"].map(function(k, i){
+    return '<li><span class="n">' + (i+1) + "</span><span>" + t(k) + "</span></li>";
+  }).join("") + "</ol>";
+
+  h += "<h4>" + esc(t("trVerifyTitle")) + "</h4>";
+  h += "<p>" + esc(t("trVerifyIntro")) + "</p>";
+  h += '<ol class="tlist">' + ["trV1","trV2","trV3","trV4"].map(function(k, i){
+    return '<li><span class="n">' + (i+1) + "</span><span>" + t(k) + "</span></li>";
+  }).join("") + "</ol>";
+  h += '<div class="caveat" style="margin-top:14px">' + esc(t("trVerifyNote")) + "</div>";
+
+  h += "<h4>" + esc(t("trHonestTitle")) + "</h4>";
+  h += '<ul class="tlist">' + ["trHonest1","trHonest2"].map(function(k){
+    return '<li><span class="tick" aria-hidden="true">•</span><span>' + t(k) + "</span></li>";
+  }).join("") + "</ul>";
+
+  if (REPO_URL){
+    h += "<h4>" + esc(t("trCodeTitle")) + "</h4>";
+    h += "<p>" + esc(t("trCode")) + "</p>";
+    h += '<a class="codelink" href="' + esc(REPO_URL) + '" target="_blank" rel="noopener noreferrer">' +
+         '<span aria-hidden="true">↗</span>' + esc(t("trCodeLink")) + "</a>";
+  }
+
+  h += "<h4>" + esc(t("trNeverTitle")) + "</h4>";
+  h += '<ul class="tlist">' + ["trNever1","trNever2","trNever3","trNever4","trNever5"].map(function(k){
+    return '<li><span class="tick" aria-hidden="true">✓</span><span>' + esc(t(k)) + "</span></li>";
+  }).join("") + "</ul>";
+
+  $("trustBody").innerHTML = h;
+}
+
+function openSheet(dlg){
+  if (typeof dlg.showModal === "function") dlg.showModal();
+  else dlg.setAttribute("open", "");
+}
+
+/* ======================= olaylar ======================= */
+$("simpleBtn").addEventListener("click", function(){ renderSimple(); openSheet($("simpleDlg")); });
+$("glossBtn").addEventListener("click", function(){
+  renderGloss($("gsearch").value);
+  openSheet($("glossDlg"));
+});
+$("gsearch").addEventListener("input", function(){ renderGloss($("gsearch").value); });
+
+function openTrust(){ renderTrust(); openSheet($("trustDlg")); }
+$("trustBtn").addEventListener("click", openTrust);
+$("footerTrustLink").addEventListener("click", openTrust);
+
+Array.prototype.forEach.call(document.querySelectorAll("dialog.sheet"), function(dlg){
+  dlg.addEventListener("click", function(e){ if (e.target === dlg) dlg.close(); });
+  Array.prototype.forEach.call(dlg.querySelectorAll("[data-close]"), function(b){
+    b.addEventListener("click", function(){ dlg.close(); });
+  });
+});
+
+$("pickBtn").addEventListener("click", function(){ $("fileInput").click(); });
+$("fileInput").addEventListener("change", function(e){
+  handleFile(e.target.files && e.target.files[0]);
+  e.target.value = "";
+});
+$("demoBtn").addEventListener("click", loadDemo);
+
+$("themeBtn").addEventListener("click", function(){
+  var t = document.documentElement.getAttribute("data-theme");
+  var dark = t === "dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+  var next = dark ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem("mrkp_theme", next); } catch(e){}
+  syncThemeBtn();
+});
+
+["margin","minSpend"].forEach(function(id){
+  $(id).addEventListener("input", function(){
+    var v = parseFloat($(id).value);
+    if (!isFinite(v)) return;
+    if (id === "margin") state.settings.margin = Math.min(95, Math.max(1, v));
+    else state.settings.minSpend = Math.max(0, v);
+    render();
+  });
+});
+$("currency").addEventListener("change", function(){ state.settings.currency = $("currency").value; render(); });
+$("numfmt").addEventListener("change", function(){ state.settings.numfmt = $("numfmt").value; render(); });
+
+Array.prototype.forEach.call($("groupSeg").querySelectorAll("button"), function(b){
+  b.addEventListener("click", function(){
+    state.groupBy = b.getAttribute("data-g");
+    Array.prototype.forEach.call($("groupSeg").querySelectorAll("button"), function(x){
+      x.setAttribute("aria-pressed", x === b ? "true" : "false");
+    });
+    render();
+  });
+});
+
+var dragDepth = 0;
+window.addEventListener("dragenter", function(e){ e.preventDefault(); dragDepth++; $("drop").hidden = false; });
+window.addEventListener("dragover", function(e){ e.preventDefault(); });
+window.addEventListener("dragleave", function(e){ e.preventDefault(); if (--dragDepth <= 0){ dragDepth = 0; $("drop").hidden = true; } });
+window.addEventListener("drop", function(e){
+  e.preventDefault(); dragDepth = 0; $("drop").hidden = true;
+  if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+});
+
+$("langSel").addEventListener("change", function(){ setLang($("langSel").value); });
+
+/* ======================= başlat ======================= */
+loadSettings();
+loadTheme();
+$("margin").value = state.settings.margin;
+$("minSpend").value = state.settings.minSpend;
+$("currency").value = state.settings.currency;
+$("numfmt").value = state.settings.numfmt;
+setLang(initialLang());
+
+})();
+</script>
+</body>
+</html>
